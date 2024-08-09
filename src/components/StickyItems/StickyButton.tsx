@@ -5,7 +5,8 @@ import { useStickyCursor } from './StickyCursorContext';
 import Magnetic from '../magnetic';
 
 interface StickyButtonProps {
-  icon: React.ReactNode;
+  children?: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
 const StickyButton: React.FC<StickyButtonProps> = ({ icon }) => {
@@ -21,7 +22,10 @@ const StickyButton: React.FC<StickyButtonProps> = ({ icon }) => {
   return (
     <button className="flex items-center justify-center m-8">
       <Magnetic>
-        <div className="size-9 bg-content flex justify-center items-center">
+        <div className="size-12 flex justify-center items-center">
+          <div className='size-12 md:bg-bgr md:text-content rounded-full md:shadow-none bg-content text-bgr shadow-custom items-center justify-center flex'>
+            {icon}
+          </div>
           <div ref={buttonRef} className="size-20 absolute rounded-full flex justify-center items-center text-content hover:size-80 origin-center"/>
         </div>
       </Magnetic>

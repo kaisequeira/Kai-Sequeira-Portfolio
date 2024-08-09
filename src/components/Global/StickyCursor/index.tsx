@@ -8,7 +8,7 @@ export default function CustomCursor() {
     const { stickyButtons } = useStickyCursor();
     const [isHovered, setIsHovered] = useState(false);
 
-    const CURSOR_SIZE = isHovered ? 70 : 20;
+    const CURSOR_SIZE = isHovered ? 70 : 0;
     const cursorRef = useRef<HTMLDivElement>(null);
     const mouseMovement = { stiffness: 300, damping: 20, mass: 0.5 };
     // const mouseMovement = { stiffness: 1000, damping: 30, mass: 0.5 };
@@ -106,7 +106,7 @@ export default function CustomCursor() {
 
     return (
         <motion.div
-            className={`bg-white mix-blend-difference z-10 rounded-full top-0 left-0 pointer-events-none fixed`}
+            className={`z-10 rounded-full top-0 left-0 pointer-events-none fixed`}
             ref={cursorRef}
             transformTemplate={template}
             animate={{
@@ -114,6 +114,8 @@ export default function CustomCursor() {
                 height: CURSOR_SIZE
             }}
             style={{
+                mixBlendMode: isHovered ? "difference" : "normal",
+                backgroundColor: isHovered ? "white" : `rgb(var(--color-content))`,
                 left: smoothMouse.x, 
                 top: smoothMouse.y, 
                 scaleX: scale.x,

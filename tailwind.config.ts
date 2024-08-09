@@ -17,6 +17,13 @@ const config: Config = {
         },
         bgr: "rgb(var(--color-bgr))",
         content: "rgb(var(--color-content))",
+        shapes: "rgb(var(--color-shapes))",
+      },
+      spacing: {
+        '1/5': '20%',
+        '1/6': '16.666667%',
+        '1/8': '12.5%',
+        '1/10': '10%',
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
