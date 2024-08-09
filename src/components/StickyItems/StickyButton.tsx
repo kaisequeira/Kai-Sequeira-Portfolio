@@ -9,7 +9,7 @@ interface StickyButtonProps {
 }
 
 const StickyButton: React.FC<StickyButtonProps> = ({ icon }) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
   const { registerStickyButton } = useStickyCursor();
 
   useEffect(() => {
@@ -19,13 +19,13 @@ const StickyButton: React.FC<StickyButtonProps> = ({ icon }) => {
   }, [registerStickyButton]);
 
   return (
-    <button ref={buttonRef} className="flex items-center justify-center absolute size-14 top-0 left-0 m-8 hover:scale-400">
-          <span className="text-content flex items-center justify-center">
-            <Magnetic>
-              {icon}
-            </Magnetic>
-          </span>
-      </button> 
+    <button className="flex items-center justify-center m-8">
+      <Magnetic>
+        <div className="size-9 bg-content flex justify-center items-center">
+          <div ref={buttonRef} className="size-20 absolute rounded-full flex justify-center items-center text-content hover:size-80 origin-center"/>
+        </div>
+      </Magnetic>
+    </button> 
   );
 };
 

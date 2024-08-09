@@ -10,9 +10,11 @@ const Home: React.FC = () => {
 
   return (
     <div className="bg-bgr w-screen h-screen flex flex-col md:space-y-7 sm:space-y-4 space-y-2 items-center justify-center">
-      <StickyButton
-        icon={<FontAwesomeIcon className='size-12' icon={faPlay} />}
-      />
+      <div className='absolute top-0 left-0 w-screen'>
+        <StickyButton
+          icon={<FontAwesomeIcon className='size-9 text-white' icon={faPlay} />}
+        />
+      </div>
       <h1 className="text-center">
         Kai Sequeira
       </h1>

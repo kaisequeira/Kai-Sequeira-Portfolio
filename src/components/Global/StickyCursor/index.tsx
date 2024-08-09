@@ -1,40 +1,70 @@
 "use client";
 
 import { useStickyCursor } from '@/components/StickyItems/StickyCursorContext';
-import { motion, transform, useMotionValue, useSpring, Variants, animate } from 'framer-motion';
-import { useEffect, useRef, useState } from "react";
+import { motion, transform, useMotionValue, useSpring, animate } from 'framer-motion';
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 export default function CustomCursor() {
     const { stickyButtons } = useStickyCursor();
     const [isHovered, setIsHovered] = useState(false);
-    const cursorRef = useRef<HTMLDivElement>(null);
-    
+
     const CURSOR_SIZE = isHovered ? 70 : 20;
+    const cursorRef = useRef<HTMLDivElement>(null);
+    const mouseMovement = { stiffness: 300, damping: 20, mass: 0.5 };
+    // const mouseMovement = { stiffness: 1000, damping: 30, mass: 0.5 };
 
-    const mouse = {
-        x: useMotionValue(0),
-        y: useMotionValue(0)
-    }
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
 
-    // const mouseMovement = { stiffness: 1500, damping: 50, mass: 0.5 };
-    const mouseMovement = { damping: 20, stiffness: 300, mass: 0.5 };
+    const scaleX = useMotionValue(1);
+    const scaleY = useMotionValue(1);
+
+    const scale = useMemo(() => ({
+        x: scaleX,
+        y: scaleY
+    }), [scaleX, scaleY]);
+
+    const mouse = useMemo(() => ({
+        x: mouseX,
+        y: mouseY
+    }), [mouseX, mouseY]);
+    
+    const smoothMouseX = useSpring(mouse.x, mouseMovement);
+    const smoothMouseY = useSpring(mouse.y, mouseMovement);
+
     const smoothMouse = {
-        x: useSpring(mouse.x, mouseMovement),
-        y: useSpring(mouse.y, mouseMovement)
+        x: smoothMouseX,
+        y: smoothMouseY
     };
 
-    const scale = {
-        x: useMotionValue(1),
-        y: useMotionValue(1)
-    }
-
-    const rotate = (distance: {x: number, y: number}) => {
+    const rotate = useCallback((distance: { x: number, y: number }) => {
         const angle = Math.atan2(distance.y, distance.x);
-        if (cursorRef.current)
+        if (cursorRef.current) {
             animate(cursorRef.current, { rotate: `${angle}rad` }, { duration: 0 });
+        }
+    }, [cursorRef]);
+
+    const manageMouseOver = () => {
+        setIsHovered(true);
     }
 
-    const manageMouseMove = (e: MouseEvent) => {
+    const manageMouseOut = () => {
+        setIsHovered(false);
+        if (cursorRef.current)
+            animate(cursorRef.current, { scaleX: 1, scaleY: 1 }, {duration: 0.1, type: "spring" })
+    }
+
+    const closestButton = stickyButtons.reduce(
+        (acc, button) => {
+            const rect = button.current?.getBoundingClientRect();
+            if (!rect) return acc;
+            const distance = Math.hypot(mouse.x.get() - rect.x, mouse.y.get() - rect.y);
+            return distance < acc.distance ? { distance, button } : acc;
+        },
+        { distance: Infinity, button: null as React.RefObject<HTMLDivElement> | null }
+    );
+
+    const manageMouseMove = useCallback((e: MouseEvent) => {
         const { clientX, clientY } = e;
     
         const { left = 0, top = 0, height = 0, width = 0 } = closestButton.button?.current?.getBoundingClientRect() || {};
@@ -56,27 +86,7 @@ export default function CustomCursor() {
             mouse.x.set(clientX - CURSOR_SIZE / 2);
             mouse.y.set(clientY - CURSOR_SIZE / 2);
         }
-    }
-
-    const manageMouseOver = () => {
-        setIsHovered(true);
-    }
-
-    const manageMouseOut = () => {
-        setIsHovered(false);
-        if (cursorRef.current)
-            animate(cursorRef.current, { scaleX: 1, scaleY: 1 }, {duration: 0.1, type: "spring" })
-    }
-
-    const closestButton = stickyButtons.reduce(
-        (acc, button) => {
-            const rect = button.current?.getBoundingClientRect();
-            if (!rect) return acc;
-            const distance = Math.hypot(mouse.x.get() - rect.x, mouse.y.get() - rect.y);
-            return distance < acc.distance ? { distance, button } : acc;
-        },
-        { distance: Infinity, button: null as React.RefObject<HTMLButtonElement> | null }
-    );
+    }, [isHovered, rotate, scale, mouse, CURSOR_SIZE, closestButton.button]);
 
     useEffect(() => {
         closestButton.button?.current?.addEventListener("mouseover", manageMouseOver);
@@ -88,7 +98,7 @@ export default function CustomCursor() {
             closestButton.button?.current?.removeEventListener("mouseleave", manageMouseOut);
             window.removeEventListener("mousemove", manageMouseMove);
         }
-    }, [manageMouseMove]);
+    }, [manageMouseMove, closestButton.button]);
 
     const template = ({rotate, scaleX, scaleY}: {rotate: number, scaleX: number, scaleY: number}) => {
         return `rotate(${rotate}) scaleX(${scaleX}) scaleY(${scaleY})` 

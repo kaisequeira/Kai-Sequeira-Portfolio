@@ -3,16 +3,16 @@
 import React, { createContext, useContext, useRef, useState, ReactNode, useCallback } from 'react';
 
 interface StickyCursorContextType {
-  stickyButtons: React.RefObject<HTMLButtonElement>[];
-  registerStickyButton: (ref: React.RefObject<HTMLButtonElement>) => void;
+  stickyButtons: React.RefObject<HTMLDivElement>[];
+  registerStickyButton: (ref: React.RefObject<HTMLDivElement>) => void;
 }
 
 const StickyCursorContext = createContext<StickyCursorContextType | undefined>(undefined);
 
 export const StickyCursorProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [stickyButtons, setStickyButtons] = useState<React.RefObject<HTMLButtonElement>[]>([]);
+  const [stickyButtons, setStickyButtons] = useState<React.RefObject<HTMLDivElement>[]>([]);
 
-  const registerStickyButton = useCallback((ref: React.RefObject<HTMLButtonElement>) => {
+  const registerStickyButton = useCallback((ref: React.RefObject<HTMLDivElement>) => {
     setStickyButtons((prev) => [...prev, ref]);
   }, []);
 
