@@ -25,6 +25,9 @@ const config: Config = {
         '1/8': '12.5%',
         '1/10': '10%',
       },
+      padding: {
+        '1/14': '7.142857%',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

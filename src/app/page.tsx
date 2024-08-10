@@ -1,21 +1,28 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { StickyCursorProvider } from "@/components/Global/StickyCursorContext";
 import CustomCursor from "@/components/Global/StickyCursor";
 import Home from "@/components/Home";
+import Technologies from "@/components/Technologies";
 import './globals.css';
-import { StickyCursorProvider } from "@/components/StickyItems/StickyCursorContext";
+import LenisWrapper from "@/components/Global/LenisWrapper";
+import AboutMe from "@/components/AboutMe";
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ['400', '700'],
+  weight: ['200', '300', '500', '700'],
 });
 
 export default function Page() {
     return (
-        <main className={`${jakartaSans.className} w-screen`}>
-            <StickyCursorProvider>
-                <CustomCursor />
-                <Home />
-            </StickyCursorProvider>
+        <main className={`${jakartaSans.className} w-screen flex flex-col`}>
+            <LenisWrapper>
+                <StickyCursorProvider>
+                    <CustomCursor />
+                    <Home />
+                    <Technologies />
+                    <AboutMe />
+                </StickyCursorProvider>
+            </LenisWrapper>
         </main>
     )
 }

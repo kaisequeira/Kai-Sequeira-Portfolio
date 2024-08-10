@@ -30,6 +30,15 @@
   .text-balance {
     text-wrap: balance;
   }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+    /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
 
 h1 {
@@ -37,7 +46,7 @@ h1 {
 }
 
 h2 {
-  @apply text-content lg:text-10xl md:text-8xl sm:text-7xl text-5xl font-bold;
+  @apply text-content lg:text-7xl md:text-4xl sm:text-3xl text-2xl font-bold !leading-tight;
 }
 
 h3 {

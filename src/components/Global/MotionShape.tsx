@@ -9,7 +9,7 @@ type MotionShapeProps = {
 
 export default function MotionShape({ className, reverse = false }: MotionShapeProps) {
     const randomDuration = Math.floor(Math.random() * (200 - 100 + 1)) + 100;
-    const radius = 100; // Radius of the circular path
+    const radius = 40; // Radius of the circular path
 
     return (
         <motion.div

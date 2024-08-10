@@ -1,6 +1,6 @@
 "use client";
 
-import { useStickyCursor } from '@/components/StickyItems/StickyCursorContext';
+import { useStickyCursor } from '@/components/Global/StickyCursorContext';
 import { motion, transform, useMotionValue, useSpring, animate } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 

@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { useStickyCursor } from './StickyCursorContext';
-import Magnetic from '../magnetic';
+import Magnetic from './Magnetic';
 
 interface StickyButtonProps {
   children?: React.ReactNode;
