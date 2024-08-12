@@ -20,7 +20,7 @@ const StickyButton: React.FC<StickyButtonProps> = ({ icon }) => {
   }, [registerStickyButton]);
 
   return (
-    <button className="flex items-center justify-center m-8">
+    <button className="flex items-center justify-center p-8">
       <Magnetic>
         <div className="size-12 flex justify-center items-center">
           <div className='size-12 md:bg-bgr md:text-content rounded-full md:shadow-none bg-content text-bgr shadow-custom items-center justify-center flex'>

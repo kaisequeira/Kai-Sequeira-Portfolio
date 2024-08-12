@@ -11,7 +11,7 @@
   :root {
     --color-bgr: 255, 255, 255;
     --color-content: 0, 0, 0;
-    --color-shapes: 217, 217, 217;
+    --color-shapes: 127, 127, 127, 0.3;
     --color-acc1: 66, 133, 244;
     --color-acc2: 52, 168, 83;
     --color-acc3: 251, 188, 5;
@@ -21,7 +21,6 @@
     :root {
       --color-bgr: 0, 0, 0;
       --color-content: 255, 255, 255;
-      --color-shapes: 38, 38, 38;
     }
   }
 }
@@ -46,7 +45,7 @@ h1 {
 }
 
 h2 {
-  @apply text-content lg:text-7xl md:text-4xl sm:text-3xl text-2xl font-bold !leading-tight;
+  @apply text-content lg:text-7xl md:text-6xl sm:text-5xl text-4xl font-bold !leading-tight;
 }
 
 h3 {

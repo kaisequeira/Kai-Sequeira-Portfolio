@@ -6,10 +6,11 @@ import Technologies from "@/components/Technologies";
 import './globals.css';
 import LenisWrapper from "@/components/Global/LenisWrapper";
 import AboutMe from "@/components/AboutMe";
+import Footer from "@/components/Footer";
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ['200', '300', '500', '700'],
+  weight: ['200', '300', '400', '500', '700'],
 });
 
 export default function Page() {
@@ -21,6 +22,7 @@ export default function Page() {
                     <Home />
                     <Technologies />
                     <AboutMe />
+                    <Footer />
                 </StickyCursorProvider>
             </LenisWrapper>
         </main>

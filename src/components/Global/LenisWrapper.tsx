@@ -12,21 +12,12 @@ const LenisWrapper: React.FC<LenisWrapperProps> = ({ children }) => {
         if (typeof window !== 'undefined') {
             const lenis = new Lenis();
 
-            const handleScroll = (event: Event) => {
-                console.log(event);
-            };
-
             const raf = (time: number) => {
                 lenis.raf(time);
                 requestAnimationFrame(raf);
             };
 
-            lenis.on('scroll', handleScroll);
             requestAnimationFrame(raf);
-
-            return () => {
-                lenis.off('scroll', handleScroll);
-            };
         }
     }, []);
 

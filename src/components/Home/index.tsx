@@ -17,7 +17,7 @@ const Home: React.FC = () => {
       <MotionShape className="absolute bottom-1/4 left-1/6 rotate-12 size-40 bg-shapes"/>
       <MotionShape className="absolute rounded-full rotate-45 size-28 bg-shapes bottom-1/10 left-1/4" reverse={true}/>
       <MotionShape className="absolute top-1/4 right-1/6 rotate-45 size-64 bg-shapes" reverse={true}/>
-      <MotionShape className="absolute border-b-shapes border-[100px] w-0 h-0 border-t-0 border-x-transparent top-1/10 right-1/4"/>
+      <MotionShape className="absolute inline-block w-0 h-0 border-solid border-t-0 border-r-[73.5px] border-l-[73.5px] border-b-[127.3px] border-l-transparent border-r-transparent border-t-transparent border-b-shapes top-1/10 right-1/4"/>
       <h1 className="text-center z-10">
         Kai Sequeira
       </h1>
@@ -27,19 +27,19 @@ const Home: React.FC = () => {
       <div className='flex space-x-4 z-10'>
         <ContactCircle
           icon={<FontAwesomeIcon className='size-2/3' icon={faGithub} />}
-          color='#4285F4'
+          color='rgb(var(--color-acc1))'
         />
         <ContactCircle
           icon={<FontAwesomeIcon className='size-7/12' icon={faLinkedin} />}
-          color='#34A853'
+          color='rgb(var(--color-acc2))'
         />
         <ContactCircle
           icon={<FontAwesomeIcon className='size-5/12' icon={faFileArrowDown} />}
-          color='#FBBC05'
+          color='rgb(var(--color-acc3))'
         />
         <ContactCircle
           icon={<FontAwesomeIcon className='size-7/12' icon={faMailBulk} />}
-          color='#EA4335'
+          color='rgb(var(--color-acc4))'
         />
       </div>
     </div>
