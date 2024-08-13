@@ -7,6 +7,7 @@ import './globals.css';
 import LenisWrapper from "@/components/Global/LenisWrapper";
 import AboutMe from "@/components/AboutMe";
 import Footer from "@/components/Footer";
+import Projects from "@/components/Projects";
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -22,6 +23,7 @@ export default function Page() {
                     <Home />
                     <Technologies />
                     <AboutMe />
+                    <Projects />
                     <Footer />
                 </StickyCursorProvider>
             </LenisWrapper>

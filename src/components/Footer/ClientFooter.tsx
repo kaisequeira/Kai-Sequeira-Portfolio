@@ -20,7 +20,7 @@ const ClientFooter: React.FC = () => {
                 rel='noopener noreferrer'
             >
                 <p className='font-extrabold text-bgr lg:text-2xl text-base'>Github</p>
-                <FontAwesomeIcon className='text-bgr lg:size-8 size-4' icon={faArrowUpRightFromSquare} />
+                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faArrowUpRightFromSquare} />
             </a>
             <a
                 className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr items-center'
@@ -29,7 +29,7 @@ const ClientFooter: React.FC = () => {
                 rel='noopener noreferrer'
             >
                 <p className='font-extrabold text-bgr lg:text-2xl text-base'>Linkedin</p>
-                <FontAwesomeIcon className='text-bgr lg:size-8 size-4' icon={faArrowUpRightFromSquare} />
+                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faArrowUpRightFromSquare} />
             </a>
             <a
                 className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr items-center'
@@ -37,7 +37,7 @@ const ClientFooter: React.FC = () => {
                 download={'KaiSequeiraResume.pdf'}
             >
                 <p className='font-extrabold text-bgr lg:text-2xl text-base'>Resume</p>
-                <FontAwesomeIcon className='text-bgr lg:size-8 size-4' icon={faDownload} />
+                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faDownload} />
             </a>
             <a
                 className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr items-center'
@@ -48,7 +48,7 @@ const ClientFooter: React.FC = () => {
                 }}
             >
                 <p className='font-extrabold text-bgr lg:text-2xl text-base'>Email</p>
-                <FontAwesomeIcon className='text-bgr lg:size-8 size-4' icon={faClipboard} />
+                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faClipboard} />
             </a>
         </div>
     );

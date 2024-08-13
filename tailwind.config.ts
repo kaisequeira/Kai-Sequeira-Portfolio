@@ -46,9 +46,6 @@ const config: Config = {
       scale: {
         '400': '4',
       },
-      boxShadow: {
-        'custom': '0 10px 15px rgba(var(--color-content), 0.2), 0 4px 6px rgba(var(--color-content), 0.2)',
-      }
     },
   },
   plugins: [],
