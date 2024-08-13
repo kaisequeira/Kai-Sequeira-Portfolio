@@ -1,7 +1,6 @@
 import React from 'react';
 import ContactCircle from './ContactCircle';
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faFileArrowDown, faMailBulk, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import StickyButton from '../Global/StickyButton';
 import MotionShape from '../Global/MotionShape';
@@ -25,22 +24,10 @@ const Home: React.FC = () => {
         Full stack developer studying @ UNSW
       </h4>
       <div className='flex space-x-4 z-10'>
-        <ContactCircle
-          icon={<FontAwesomeIcon className='size-2/3' icon={faGithub} />}
-          color='rgb(var(--color-acc1))'
-        />
-        <ContactCircle
-          icon={<FontAwesomeIcon className='size-7/12' icon={faLinkedin} />}
-          color='rgb(var(--color-acc2))'
-        />
-        <ContactCircle
-          icon={<FontAwesomeIcon className='size-5/12' icon={faFileArrowDown} />}
-          color='rgb(var(--color-acc3))'
-        />
-        <ContactCircle
-          icon={<FontAwesomeIcon className='size-7/12' icon={faMailBulk} />}
-          color='rgb(var(--color-acc4))'
-        />
+        <ContactCircle type="Github" />
+        <ContactCircle type="Linkedin" />
+        <ContactCircle type="Resume" />
+        <ContactCircle type="Email" />
       </div>
     </div>
   );

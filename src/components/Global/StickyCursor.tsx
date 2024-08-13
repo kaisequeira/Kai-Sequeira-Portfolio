@@ -114,8 +114,8 @@ export default function CustomCursor() {
                 height: CURSOR_SIZE
             }}
             style={{
-                mixBlendMode: isHovered ? "difference" : "normal",
-                backgroundColor: isHovered ? "white" : `rgb(var(--color-content))`,
+                mixBlendMode: "difference",
+                backgroundColor: "white",
                 left: smoothMouse.x, 
                 top: smoothMouse.y, 
                 scaleX: scale.x,
