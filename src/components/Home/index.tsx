@@ -8,10 +8,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="bg-bgr w-screen h-screen flex flex-col md:space-y-11 space-y-6 items-center justify-center">
-      <div className='absolute top-0 left-0 w-screen'>
-        <PlayButton className='relative p-8'/>
-        {/* <StickyButton icon={<FontAwesomeIcon className='md:size-10 size-6 pl-0.5 absolute justify-center items-center' icon={faPlay} />}/> */}
-      </div>
+        <PlayButton/>
       <MotionShape className="absolute bottom-1/4 left-1/6 rotate-12 size-40 bg-shapes"/>
       <MotionShape className="absolute rounded-full rotate-45 size-28 bg-shapes bottom-1/10 left-1/4" reverse={true}/>
       <MotionShape className="absolute top-1/4 right-1/6 rotate-45 size-64 bg-shapes" reverse={true}/>
@@ -24,7 +21,7 @@ const Home: React.FC = () => {
           Full stack developer studying @ UNSW
         </h4>
       </div>
-      <div className='flex space-x-4 z-10'>
+      <div className='flex md:space-x-4 space-x-2 z-10'>
         <ContactCircle type="Github" />
         <ContactCircle type="Linkedin" />
         <ContactCircle type="Resume" />

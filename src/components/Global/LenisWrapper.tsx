@@ -1,19 +1,24 @@
 "use client";
 
-import React, { useEffect, ReactElement } from 'react';
+import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import Lenis from 'lenis';
 
-interface LenisWrapperProps {
-    children: ReactElement;
+interface LenisContextType {
+    lenis: Lenis | null;
 }
 
-const LenisWrapper: React.FC<LenisWrapperProps> = ({ children }) => {
+const LenisContext = createContext<LenisContextType>({ lenis: null });
+
+export const LenisWrapper: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [lenis, setLenis] = useState<Lenis | null>(null);
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            const lenis = new Lenis();
+            const lenisInstance = new Lenis();
+            setLenis(lenisInstance);
 
             const raf = (time: number) => {
-                lenis.raf(time);
+                lenisInstance.raf(time);
                 requestAnimationFrame(raf);
             };
 
@@ -21,7 +26,15 @@ const LenisWrapper: React.FC<LenisWrapperProps> = ({ children }) => {
         }
     }, []);
 
-    return React.cloneElement(children);
+    return (
+        <LenisContext.Provider value={{ lenis }}>
+            {children}
+        </LenisContext.Provider>
+    );
+};
+
+export const useLenis = () => {
+    return useContext(LenisContext);
 };
 
 export default LenisWrapper;

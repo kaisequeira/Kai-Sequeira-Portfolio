@@ -46,7 +46,7 @@ const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
 
     return (
         <motion.button
-            className={"rounded-3xl lg:size-24 sm:size-20 size-16 flex items-center justify-center"}
+            className={"md:rounded-3xl rounded-2xl lg:size-24 sm:size-20 size-16 flex items-center justify-center"}
             style={{ backgroundColor: color }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ y: 15 }}

@@ -18,6 +18,8 @@ const config: Config = {
         bgr: "rgb(var(--color-bgr))",
         content: "rgb(var(--color-content))",
         shapes: "rgb(var(--color-shapes))",
+        offwhite: 'rgb(var(--color-offwhite))',
+        offblack: 'rgb(var(--color-offblack))',
       },
       spacing: {
         '1/5': '20%',
