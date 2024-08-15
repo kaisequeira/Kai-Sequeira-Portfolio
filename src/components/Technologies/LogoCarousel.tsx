@@ -2,14 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { animate, motion, useAnimation, useMotionValue } from 'framer-motion';
+import { animate, motion, useMotionValue } from 'framer-motion';
 import { useLenis } from '@/components/Global/LenisWrapper';
 import useMeasure from 'react-use-measure';
 
 const prefixLocation = '/SVGLogos/';
 const FAST_DURATION = 25;
 const SLOW_DURATION = 50;
-
 
 const logos = [
     'Javascript.svg',
@@ -32,46 +31,44 @@ const logos = [
 ];
 
 export default function LogoCarousel() {
-    const { lenis } = useLenis();
-    const [scrollDirectionLeft, setScrollDirectionLeft] = useState<boolean>(true);
-    const [isHovered, setIsHovered] = useState<boolean>(false);
-    const [duration, setDuration] = useState<number>(FAST_DURATION);
+  const { lenis } = useLenis();
+  const [scrollDirectionLeft, setScrollDirectionLeft] = useState<boolean>(true);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [duration, setDuration] = useState<number>(FAST_DURATION);
 
-    let [ref, {width}] = useMeasure();
-    const xTranslation = useMotionValue(0);
-    const [mustFinish, setMustFinish] = useState(false);
-    const [rerender, setRerender] = useState(false);
-
+  let [ref, { width }] = useMeasure();
+  const xTranslation = useMotionValue(0);
+  const [mustFinish, setMustFinish] = useState(false);
+  const [rerender, setRerender] = useState(false);
 
   useEffect(() => {
     let controls;
-    let finalPosition = -width / 2 + 1.75;
+    let finalPosition = -width / 3 + 3;
 
     if (mustFinish) {
-        controls = animate(xTranslation, [xTranslation.get(), finalPosition], {
-            ease: "linear",
-            duration: duration * (1 - xTranslation.get() / finalPosition),
-            onComplete: () => {
-                setMustFinish(false);
-                setRerender(!rerender);
-            },
-        });
+      controls = animate(xTranslation, [xTranslation.get(), finalPosition], {
+        ease: "linear",
+        duration: duration * (1 - xTranslation.get() / finalPosition),
+        onComplete: () => {
+          setMustFinish(false);
+          setRerender(!rerender);
+        },
+      });
     } else {
-        controls = animate(xTranslation, [0, finalPosition], {
-            ease: "linear",
-            repeat: Infinity,
-            duration: duration,
-            repeatType: "loop",
-            repeatDelay: 0,
-        });
+      controls = animate(xTranslation, [0, finalPosition], {
+        ease: "linear",
+        repeat: Infinity,
+        duration: duration,
+        repeatType: "loop",
+        repeatDelay: 0,
+      });
     }
-
 
     return controls?.stop;
   }, [xTranslation, width, duration, rerender]);
 
   return (
-    <div className="overflow-hidden whitespace-nowrap w-full relative">
+    <div className="overflow-hidden relative w-1/2">
       <motion.div
         className="flex w-fit"
         onHoverStart={() => {
@@ -85,16 +82,16 @@ export default function LogoCarousel() {
         ref={ref}
         style={{ x: xTranslation }}
       >
-        {logos.concat(logos).map((logo, index) => (
-          <div key={index} className="flex-none mr-4 md:size-40 size-24 p-2 flex items-center justify-center">
+        {[...logos, ...logos, ...logos].map((logo, index) => (
+          <div key={index} className="flex-none mr-4 md:size-28 size-24 p-2 flex items-center justify-center">
             <Image
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-                src={`${prefixLocation}${logo}`}
-                alt={`Logo ${index + 1}`}
-                width={120}
-                height={120}
-                className={`object-contain ${logo === 'Nextjs.svg' ? 'dark:invert-0 invert' : ''}`}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              src={`${prefixLocation}${logo}`}
+              alt={`Logo ${index + 1}`}
+              width={70}
+              height={70}
+              className={`object-contain`}
             />
           </div>
         ))}
