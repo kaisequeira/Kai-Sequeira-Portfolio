@@ -8,7 +8,7 @@ const Projects: React.FC = () => {
 
   return (
     <div className="bg-bgr flex flex-col relative">
-        <div className='rounded-3xl bg-gradient-to-bl from-shapes via-bgr to-bgr'>
+        <div className='md:rounded-5xl rounded-2xl bg-gradient-to-bl from-shapes via-bgr to-bgr'>
             <div className='w-screen h-[70vh]'/>
             <div className='w-screen h-[70vh]'/>
             <div className='w-screen h-[70vh]'/>

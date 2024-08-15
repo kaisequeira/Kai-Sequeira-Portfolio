@@ -55,7 +55,7 @@ h3 {
 }
 
 h4 {
-  @apply text-content lg:text-3xl md:text-2xl sm:text-xl text-lg font-light select-none;
+  @apply text-content lg:text-3xl md:text-2xl sm:text-xl text-lg font-light pl-1/11 pr-1/11 select-none;
 }
 
 p {

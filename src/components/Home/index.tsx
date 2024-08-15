@@ -18,7 +18,7 @@ const Home: React.FC = () => {
           Kai Sequeira
         </h1>
         <h4 className="text-center z-10">
-          Full stack developer studying @ UNSW
+          Full stack software engineer studying @ UNSW
         </h4>
       </div>
       <div className='flex md:space-x-4 space-x-2 z-10'>

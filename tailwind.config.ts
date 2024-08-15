@@ -48,6 +48,9 @@ const config: Config = {
       scale: {
         '400': '4',
       },
+      borderRadius: {
+        '5xl': '5rem',
+      },
     },
   },
   plugins: [],
