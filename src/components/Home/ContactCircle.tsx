@@ -19,22 +19,29 @@ const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
     switch (type) {
         case "Github":
             icon = <FontAwesomeIcon className='size-1/2' icon={faGithub} />;
-            color = 'rgb(var(--color-acc1))';
+            color = 'var(--gradient-acc1)';
             onClick = () => window.open('https://github.com/kaisequeira', '_blank');
             break;
         case "Linkedin":
             icon = <FontAwesomeIcon className='size-5/12' icon={faLinkedinIn} />;
-            color = 'rgb(var(--color-acc2))';
+            color = 'var(--gradient-acc2)';
             onClick = () => window.open('https://www.linkedin.com/in/kai-sequeira-3b49602ba/', '_blank');
             break;
         case "Resume":
             icon = <FontAwesomeIcon className='size-5/12' icon={faAddressCard} />;
-            color = 'rgb(var(--color-acc3))';
-            onClick = () => window.location.href = '/KaiSequeiraResume.pdf';
+            color = 'var(--gradient-acc3)';
+            onClick = () => {
+                const link = document.createElement('a');
+                link.href = '/KaiSequeiraResume.pdf';
+                link.download = 'KaiSequeiraResume.pdf';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
             break;
         case "Email":
             icon = <FontAwesomeIcon className='size-5/12' icon={faEnvelope} />;
-            color = 'rgb(var(--color-acc4))';
+            color = 'var(--gradient-acc4)';
             onClick = (event: MouseEvent<HTMLButtonElement>) => {
                 event.preventDefault();
                 navigator.clipboard.writeText(EMAIL);
@@ -47,7 +54,7 @@ const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
     return (
         <motion.button
             className={"md:rounded-3xl rounded-2xl lg:size-24 sm:size-20 size-16 flex items-center justify-center"}
-            style={{ backgroundColor: color }}
+            style={{ backgroundImage: color }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ y: 15 }}
             onClick={onClick}

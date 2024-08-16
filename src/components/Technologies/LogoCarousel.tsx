@@ -68,7 +68,7 @@ export default function LogoCarousel() {
   }, [xTranslation, width, duration, rerender]);
 
   return (
-    <div className="overflow-hidden relative w-1/2">
+    <div className="overflow-hidden relative w-full">
       <motion.div
         className="flex w-fit"
         onHoverStart={() => {
@@ -83,14 +83,14 @@ export default function LogoCarousel() {
         style={{ x: xTranslation }}
       >
         {[...logos, ...logos, ...logos].map((logo, index) => (
-          <div key={index} className="flex-none mr-4 md:size-28 size-24 p-2 flex items-center justify-center">
+          <div key={index} className="flex-none mr-4 md:size-28 size-24 p-2 flex items-center justify-center dark:bg-transparent bg-bgr rounded-2xl">
             <Image
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               src={`${prefixLocation}${logo}`}
               alt={`Logo ${index + 1}`}
-              width={70}
-              height={70}
+              width={65}
+              height={65}
               className={`object-contain`}
             />
           </div>

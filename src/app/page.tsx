@@ -15,11 +15,11 @@ const jakartaSans = Plus_Jakarta_Sans({
 
 export default function Page() {
     return (
-        <main className={`${jakartaSans.className} w-screen flex flex-col`}>
+        <main className={`${jakartaSans.className} w-screen flex flex-col bg-bgr`}>
             <LenisWrapper>
                 <Home />
-                <Technologies />
-                <AboutMe />
+                {/* <Technologies /> */}
+                {/* <AboutMe /> */}
                 <Projects />
                 <Footer />
                 <ResetScrollButton />

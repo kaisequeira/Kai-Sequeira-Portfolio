@@ -1,6 +1,9 @@
 import React from 'react';
 import ContactCircle from './ContactCircle';
 import MotionShape from '../Global/MotionShape';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PlayButton from './PlayButton';
 import '@/app/globals.css';
 
@@ -17,9 +20,17 @@ const Home: React.FC = () => {
         <h1 className="text-center z-10">
           Kai Sequeira
         </h1>
-        <h4 className="text-center z-10">
-          Full stack software engineer studying @ UNSW
-        </h4>
+          <h4 className="z-10 text-center">
+            Full stack software engineer studying @ UNSW | 3rd Year
+          </h4>
+          <div className='flex flex-row justify-center gap-4'>
+            <h4 className=" text-right z-10 p-0">
+              About <FontAwesomeIcon className='md:text-3xl text-xl pl-1' icon={faCircleUser} />
+            </h4>
+            <h4 className="text-right z-10 p-0">
+              Sydney <FontAwesomeIcon className='md:text-3xl text-xl pl-1' icon={faLocationDot} />
+            </h4>
+          </div>
       </div>
       <div className='flex md:space-x-4 space-x-2 z-10'>
         <ContactCircle type="Github" />

@@ -18,6 +18,7 @@ const config: Config = {
         bgr: "rgb(var(--color-bgr))",
         content: "rgb(var(--color-content))",
         shapes: "rgb(var(--color-shapes))",
+        subtitle: "rgb(var(--color-subtitle))",
         offwhite: 'rgb(var(--color-offwhite))',
         offblack: 'rgb(var(--color-offblack))',
       },
@@ -40,6 +41,10 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
         "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        'gradient-acc1': 'var(--gradient-acc1)',
+        'gradient-acc2': 'var(--gradient-acc2)',
+        'gradient-acc3': 'var(--gradient-acc3)',
+        'gradient-acc4': 'var(--gradient-acc4)',
       },
       fontSize: {
         '9xl': '7rem',
