@@ -1,14 +1,12 @@
 import React from 'react';
 import '@/app/globals.css';
 import MotionShape from '../Global/MotionShape';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHandPeace } from '@fortawesome/free-solid-svg-icons';
 import AnimatedIcon from './AnimatedIcon';
 
 const AboutMe: React.FC = () => {
 
   return (
-    <div className="bg-transparent w-screen h-[70vh] flex lg:flex-row flex-col items-center justify-center pl-1/10 pr-1/10 relative">
+    <div className="bg-transparent w-screen h-screen flex lg:flex-row flex-col items-center justify-center pl-1/10 pr-1/10 relative">
       <MotionShape className="absolute rounded-full rotate-45 size-32 bg-shapes top-1/10 right-1/6" reverse={true}/>
       <MotionShape className="absolute top-1/4 right-1/2 rotate-45 size-64 bg-shapes" reverse={true}/>
       <MotionShape className="absolute bottom-1/6 right-1/3 inline-block w-0 h-0 border-solid border-t-0 border-r-[73.5px] border-l-[73.5px] border-b-[127.3px] border-l-transparent border-r-transparent border-t-transparent border-b-shapes"/>

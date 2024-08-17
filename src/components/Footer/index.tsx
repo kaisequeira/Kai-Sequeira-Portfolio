@@ -14,16 +14,16 @@ export default function Footer() {
                     <div className='w-1/6 lg:h-full h-0'>
                     </div>
                     <div className='flex flex-col justify-center lg:w-2/3 w-full lg:space-y-12 space-y-8 place- pl-1/11 pr-1/11'>
-                        <p className='text-bgr lg:text-2xl text-lg text-center'>
+                        <p className='text-bgr text-center'>
                             Thanks for scrolling to the end. If you’re looking for someone with my skills, feel free to contact me on any of my socials.
                         </p>
                         <ClientFooter />
-                        <p className='text-bgr font-extralight lg:text-2xl text-lg text-center'>
+                        <p className='text-bgr font-extralight text-center'>
                             Developed with Next JS, Matter JS, Aceternity UI, Tailwind CSS & Framer Motion
                         </p>
                     </div>
                     <div className='lg:w-1/6 w-full lg:h-full h-auto pt-5 flex flex-col justify-end'>
-                        <p className='text-bgr font-extralight lg:text-2xl text-lg lg:text-end text-center lg:p-8 p-0'>
+                        <p className='text-bgr font-extralight lg:text-end text-center lg:p-8 p-0'>
                             © Kai Sequeira 2024
                         </p>
                     </div>

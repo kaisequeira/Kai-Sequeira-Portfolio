@@ -1,10 +1,9 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
-import Home from "@/components/Home";
-import LenisWrapper from "@/components/Global/LenisWrapper";
-import Footer from "@/components/Footer";
-import Projects from "@/components/Projects";
 import ResetScrollButton from "@/components/Global/ResetScrollButton";
-import './globals.css';
+import LenisWrapper from "@/components/Global/LenisWrapper";
+import AboutMe from "@/components/AboutMe";
+import Footer from "@/components/Footer";
+import '../globals.css';
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -15,10 +14,7 @@ export default function Page() {
     return (
         <main className={`${jakartaSans.className} w-screen flex flex-col bg-bgr`}>
             <LenisWrapper>
-                <Home />
-                {/* <Technologies /> */}
-                {/* <AboutMe /> */}
-                <Projects />
+                <AboutMe />
                 <Footer />
                 <ResetScrollButton />
             </LenisWrapper>

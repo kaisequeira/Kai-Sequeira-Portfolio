@@ -19,12 +19,12 @@ const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
     switch (type) {
         case "Github":
             icon = <FontAwesomeIcon className='size-1/2' icon={faGithub} />;
-            color = 'var(--gradient-acc1)';
+            color = 'var(--gradient-acc2)';
             onClick = () => window.open('https://github.com/kaisequeira', '_blank');
             break;
         case "Linkedin":
             icon = <FontAwesomeIcon className='size-5/12' icon={faLinkedinIn} />;
-            color = 'var(--gradient-acc2)';
+            color = 'var(--gradient-acc1)';
             onClick = () => window.open('https://www.linkedin.com/in/kai-sequeira-3b49602ba/', '_blank');
             break;
         case "Resume":
