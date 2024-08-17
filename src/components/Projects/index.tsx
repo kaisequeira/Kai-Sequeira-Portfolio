@@ -1,6 +1,6 @@
 import React from 'react';
 import '@/app/globals.css';
-import MotionShape from '../Global/MotionShape';
+import MotionShape from '../_Global/MotionShape';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandPeace } from '@fortawesome/free-solid-svg-icons';
 import ProjectPane from './ProjectPane';

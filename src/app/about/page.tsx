@@ -1,6 +1,6 @@
 import { Plus_Jakarta_Sans } from "next/font/google";
-import ResetScrollButton from "@/components/Global/ResetScrollButton";
-import LenisWrapper from "@/components/Global/LenisWrapper";
+import ResetScrollButton from "@/components/_Global/ResetScrollButton";
+import LenisWrapper from "@/components/_Global/LenisWrapper";
 import AboutMe from "@/components/AboutMe";
 import Footer from "@/components/Footer";
 import '../globals.css';

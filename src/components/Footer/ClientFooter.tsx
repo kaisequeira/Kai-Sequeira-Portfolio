@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import { faCopy, faFloppyDisk, faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
+import { faFloppyDisk, faPaste, faSquareArrowUpRight, faFileArrowDown  } from '@fortawesome/free-solid-svg-icons';
+import {  } from '@fortawesome/free-solid-svg-icons';
 
 const ClientFooter: React.FC = () => {
     const EMAIL = 'kai.sequeira2003@gmail.com';
@@ -21,7 +21,7 @@ const ClientFooter: React.FC = () => {
                 rel='noopener noreferrer'
             >
                 <p className='font-extrabold text-bgr'>Github</p>
-                <FontAwesomeIcon className='text-bgr lg:size-5 size-4' icon={faArrowUpRightFromSquare} />
+                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faSquareArrowUpRight} />
             </a>
             <a
                 className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr items-center'
@@ -30,7 +30,7 @@ const ClientFooter: React.FC = () => {
                 rel='noopener noreferrer'
             >
                 <p className='font-extrabold text-bgr'>Linkedin</p>
-                <FontAwesomeIcon className='text-bgr lg:size-5 size-4' icon={faArrowUpRightFromSquare} />
+                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faSquareArrowUpRight} />
             </a>
             <a
                 className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr items-center'
@@ -38,7 +38,7 @@ const ClientFooter: React.FC = () => {
                 download={'KaiSequeiraResume.pdf'}
             >
                 <p className='font-extrabold text-bgr'>Resume</p>
-                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faFloppyDisk} />
+                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faFileArrowDown} />
             </a>
             <a
                 className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr items-center'
@@ -49,7 +49,7 @@ const ClientFooter: React.FC = () => {
                 }}
             >
                 <p className='font-extrabold text-bgr'>Email</p>
-                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faCopy} />
+                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faPaste} />
             </a>
         </div>
     );

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { animate, motion, useMotionValue } from 'framer-motion';
-import { useLenis } from '@/components/Global/LenisWrapper';
+import { useLenis } from '@/components/_Global/LenisWrapper';
 import useMeasure from 'react-use-measure';
 
 const prefixLocation = '/SVGLogos/';

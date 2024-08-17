@@ -1,5 +1,5 @@
 import React from 'react';
-import Label from '../Global/Label';
+import Label from '../_Global/Label';
 
 interface ProjectPaneProps {
   className: string;

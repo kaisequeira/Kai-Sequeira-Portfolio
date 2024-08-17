@@ -1,6 +1,6 @@
 import React from 'react';
 import '@/app/globals.css';
-import MotionShape from '../Global/MotionShape';
+import MotionShape from '../_Global/MotionShape';
 import AnimatedIcon from './AnimatedIcon';
 
 const AboutMe: React.FC = () => {
@@ -15,13 +15,13 @@ const AboutMe: React.FC = () => {
                 Nice to meet you, <br/> I'm Kai  <AnimatedIcon />
             </h2>
             <div className='space-y-8 lg:line-clamp-none md:line-clamp-none line-clamp-6'>
-                <p className='md:text-3xl text-lg text-content font-normal'>
+                <p className='text-content font-normal'>
                     Currently working as a Software Engineer for UNSW Redback Racing, I am a full stack developer with a passion for solving complex problems. I enjoy designing and implementing scalable services and crafting intuitive user interfaces. My work spans building microservices, optimizing UI/UX, and creating seamless experiences.
                 </p>
-                <p className='md:text-3xl text-lg text-content font-extralight'>
+                <p className='text-content font-extralight'>
                     My tech stack,
                 </p>
-                <p className='md:text-xl text-lg font-normal text-content'>
+                <p className='font-normal text-content'>
                     I have a keen interest in photography, capturing moments with friends and places I’ve been to. I also enjoy game design, exploring the creative and technical aspects of creating small packaged experiences. When I’m not busy at home, I’ll take any chance to travel, broaden my horizons and discover new places.
                 </p>
             </div>

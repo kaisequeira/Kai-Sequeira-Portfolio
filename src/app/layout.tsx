@@ -14,9 +14,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en" className="overflow-y-auto !no-scrollbar overflow-x-clip">
-      <body suppressHydrationWarning={true} className={inter.className}>{children}</body>
+      <body suppressHydrationWarning={true} className={inter.className}>
+        {children}
+      </body>
     </html>
   );
 }

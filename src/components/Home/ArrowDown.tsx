@@ -2,7 +2,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { useLenis } from '../Global/LenisWrapper';
+import { useLenis } from '../_Global/LenisWrapper';
 import { motion } from 'framer-motion';
 import React, { useState, useEffect, useRef } from 'react';
 

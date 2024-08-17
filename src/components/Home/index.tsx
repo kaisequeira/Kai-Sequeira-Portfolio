@@ -1,11 +1,11 @@
 import React from 'react';
 import ContactCircle from './ContactCircle';
-import MotionShape from '../Global/MotionShape';
+import MotionShape from '../_Global/MotionShape';
 import { faSchool } from '@fortawesome/free-solid-svg-icons';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '@/app/globals.css';
-import Label from '../Global/Label';
+import Label from '../_Global/Label';
 import ScrollDownButton from './ArrowDown';
 import Navigation from './Navigation';
 
