@@ -4,9 +4,11 @@ import React, { act, MouseEvent, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
-import { faFileArrowDown, faEnvelope, faAddressCard, faSquareArrowUpRight, faPaste } from '@fortawesome/free-solid-svg-icons';
+import { faFileArrowDown, faEnvelope, faAddressCard, faSquareArrowUpRight, faPaste, faToolbox, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/navigation';
 
-type ContactType = "Github" | "LinkedIn" | "Resume" | "Email";
+
+type ContactType = "Github" | "LinkedIn" | "Resume" | "Email" | "My stack";
 
 interface ContactCircleProps {
     type: ContactType;
@@ -16,23 +18,24 @@ const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
     const [hovered, setHovered] = useState(false);
     const EMAIL = 'kai.sequeira2003@gmail.com';
     let icon, color, onClick, actionIcon;
+    const router = useRouter();
 
     switch (type) {
         case "Github":
             icon = <FontAwesomeIcon className='size-1/2 text-offwhite' icon={faGithub} />;
-            actionIcon = <FontAwesomeIcon className='size-6 text-offwhite' icon={faSquareArrowUpRight} />;
+            actionIcon = faSquareArrowUpRight;
             color = 'var(--gradient-acc2)';
             onClick = () => window.open('https://github.com/kaisequeira', '_blank');
             break;
         case "LinkedIn":
             icon = <FontAwesomeIcon className='size-5/12 text-offwhite' icon={faLinkedinIn} />;
-            actionIcon = <FontAwesomeIcon className='size-6 text-offwhite' icon={faSquareArrowUpRight} />;
+            actionIcon = faSquareArrowUpRight;
             color = 'var(--gradient-acc1)';
             onClick = () => window.open('https://www.linkedin.com/in/kai-sequeira-3b49602ba/', '_blank');
             break;
         case "Resume":
             icon = <FontAwesomeIcon className='size-5/12 text-offwhite' icon={faAddressCard} />;
-            actionIcon = <FontAwesomeIcon className='size-6 text-offwhite' icon={faFileArrowDown} />;
+            actionIcon = faFileArrowDown;
             color = 'var(--gradient-acc3)';
             onClick = () => {
                 const link = document.createElement('a');
@@ -45,12 +48,18 @@ const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
             break;
         case "Email":
             icon = <FontAwesomeIcon className='size-5/12 text-offwhite' icon={faEnvelope} />;
-            actionIcon = <FontAwesomeIcon className='size-6 text-offwhite' icon={faPaste} />;
+            actionIcon = faPaste;
             color = 'var(--gradient-acc4)';
             onClick = (event: MouseEvent<HTMLButtonElement>) => {
                 event.preventDefault();
                 navigator.clipboard.writeText(EMAIL);
             };
+            break;
+        case "My stack":
+            icon = <FontAwesomeIcon className='size-5/12 text-offwhite' icon={faToolbox} />;
+            actionIcon = faPlay;
+            color = 'var(--gradient-acc5)';
+            onClick = () => router.push('/play');
             break;
         default:
             throw new Error("Invalid contact type");
@@ -81,7 +90,7 @@ const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
                 <p className='text-offwhite font-semibold text-center'>
                     {type.toString()}
                 </p>
-                {actionIcon}
+                <FontAwesomeIcon className='size-6 text-offwhite' icon={actionIcon} />
             </motion.div>
         </div>
     );

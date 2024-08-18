@@ -6,11 +6,11 @@ import AnimatedIcon from './AnimatedIcon';
 const AboutMe: React.FC = () => {
 
   return (
-    <div className="bg-transparent w-screen h-screen flex lg:flex-row flex-col items-center justify-center pl-1/10 pr-1/10 relative">
+    <div className="bg-transparent w-screen h-screen flex lg:flex-row flex-col items-center justify-center relative">
       <MotionShape className="absolute rounded-full rotate-45 size-32 bg-shapes top-1/10 right-1/6" reverse={true}/>
       <MotionShape className="absolute top-1/4 right-1/2 rotate-45 size-64 bg-shapes" reverse={true}/>
       <MotionShape className="absolute bottom-1/6 right-1/3 inline-block w-0 h-0 border-solid border-t-0 border-r-[73.5px] border-l-[73.5px] border-b-[127.3px] border-l-transparent border-r-transparent border-t-transparent border-b-shapes"/>
-        <div className='flex flex-col justify-center lg:w-2/5 w-full space-y-8 z-10'>
+        <div className='flex flex-col justify-center lg:w-1/2 w-full space-y-8 z-10 p-1/10 '>
             <h2>
                 Nice to meet you, <br/> I'm Kai  <AnimatedIcon />
             </h2>
@@ -26,7 +26,7 @@ const AboutMe: React.FC = () => {
                 </p>
             </div>
         </div>
-        <div className='h-full lg:w-3/5 w-screen p-1/8 z-10'>
+        <div className='h-full lg:w-1/2 w-screen z-10'>
 
         </div>
     </div>

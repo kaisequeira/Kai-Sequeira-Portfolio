@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface LabelProps {
-    title: string;
+    title?: string;
     note?: string;
     children?: React.ReactNode;
 }
@@ -9,9 +9,9 @@ interface LabelProps {
 const Label: React.FC<LabelProps> = ({ title, note, children }) => {
     return (
         <div className="flex items-center space-x-2">
-            <p className="flex font-semibold">
+            {title !== undefined && (<p className="flex font-semibold">
                 {title}
-            </p>
+            </p>)}
             {children}
             {note !== undefined && (
                 <>

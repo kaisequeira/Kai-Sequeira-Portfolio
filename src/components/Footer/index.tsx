@@ -19,7 +19,7 @@ export default function Footer() {
                         </p>
                         <ClientFooter />
                         <p className='text-bgr font-extralight text-center'>
-                            Developed with Next JS, Matter JS, Aceternity UI, Tailwind CSS & Framer Motion
+                            Developed with Next JS, Matter JS, Tailwind CSS & Framer Motion
                         </p>
                     </div>
                     <div className='lg:w-1/6 w-full lg:h-full h-auto pt-5 flex flex-col justify-end'>

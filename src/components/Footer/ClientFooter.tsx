@@ -29,7 +29,7 @@ const ClientFooter: React.FC = () => {
                 target='_blank'
                 rel='noopener noreferrer'
             >
-                <p className='font-extrabold text-bgr'>Linkedin</p>
+                <p className='font-extrabold text-bgr'>LinkedIn</p>
                 <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faSquareArrowUpRight} />
             </a>
             <a

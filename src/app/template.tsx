@@ -10,7 +10,7 @@ const variants = {
 
 export default function Template({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-bgr w-full h-full">
+    <div className="bg-bgr w-full h-full overflow-y-auto !no-scrollbar overflow-x-clip">
         <motion.main
             variants={variants}
             initial="hidden"

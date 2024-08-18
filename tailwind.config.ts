@@ -14,6 +14,7 @@ const config: Config = {
           2: "rgb(var(--color-acc2))",
           3: "rgb(var(--color-acc3))",
           4: "rgb(var(--color-acc4))",
+          5: "rgb(var(--color-acc5))",
         },
         bgr: "rgb(var(--color-bgr))",
         content: "rgb(var(--color-content))",
