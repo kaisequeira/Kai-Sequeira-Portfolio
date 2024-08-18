@@ -4,7 +4,7 @@ import React, { act, MouseEvent, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
-import { faFileArrowDown, faEnvelope, faAddressCard, faSquareArrowUpRight, faPaste, faToolbox, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { faFileArrowDown, faEnvelope, faAddressCard, faSquareArrowUpRight, faPaste, faToolbox, faPlay, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
 
 
@@ -16,9 +16,15 @@ interface ContactCircleProps {
 
 const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
     const [hovered, setHovered] = useState(false);
+    const [clicked, setClicked] = useState(false);
     const EMAIL = 'kai.sequeira2003@gmail.com';
-    let icon, color, onClick, actionIcon;
+    let icon: JSX.Element, color: string, successTitle: string | undefined = undefined, onClick: (event: MouseEvent<HTMLButtonElement>) => void, actionIcon: any;
     const router = useRouter();
+
+    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+        setClicked(true);
+        if (onClick) onClick(event);
+    };
 
     switch (type) {
         case "Github":
@@ -49,6 +55,7 @@ const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
         case "Email":
             icon = <FontAwesomeIcon className='size-5/12 text-offwhite' icon={faEnvelope} />;
             actionIcon = faPaste;
+            successTitle = 'Copied';
             color = 'var(--gradient-acc4)';
             onClick = (event: MouseEvent<HTMLButtonElement>) => {
                 event.preventDefault();
@@ -73,7 +80,7 @@ const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
                 whileHover={{ y: -5 }}
-                onClick={onClick}
+                onClick={handleClick}
             >
                 <span className={`flex items-center justify-center text-white`}>
                     {icon}
@@ -86,11 +93,12 @@ const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
                 animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ type: "spring", duration: 0.2 }}
+                onAnimationComplete={() => !hovered && setClicked(false)}
             >
                 <p className='text-offwhite font-semibold text-center'>
-                    {type.toString()}
+                    {clicked && successTitle !== undefined ? successTitle : type.toString()}
                 </p>
-                <FontAwesomeIcon className='size-6 text-offwhite' icon={actionIcon} />
+                <FontAwesomeIcon className='size-6 text-offwhite' icon={clicked ? faCircleCheck : actionIcon} />
             </motion.div>
         </div>
     );

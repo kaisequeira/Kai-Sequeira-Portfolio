@@ -2,15 +2,19 @@ import React from 'react';
 import '@/app/globals.css';
 import MotionShape from '../_Global/MotionShape';
 import AnimatedIcon from './AnimatedIcon';
+import Image from 'next/image';
+import Navigation from '../Home/Navigation';
+import { faHouse } from '@fortawesome/free-solid-svg-icons';
 
 const AboutMe: React.FC = () => {
 
   return (
     <div className="bg-transparent w-screen h-screen flex lg:flex-row flex-col items-center justify-center relative">
-      <MotionShape className="absolute rounded-full rotate-45 size-32 bg-shapes top-1/10 right-1/6" reverse={true}/>
-      <MotionShape className="absolute top-1/4 right-1/2 rotate-45 size-64 bg-shapes" reverse={true}/>
-      <MotionShape className="absolute bottom-1/6 right-1/3 inline-block w-0 h-0 border-solid border-t-0 border-r-[73.5px] border-l-[73.5px] border-b-[127.3px] border-l-transparent border-r-transparent border-t-transparent border-b-shapes"/>
-        <div className='flex flex-col justify-center lg:w-1/2 w-full space-y-8 z-10 p-1/10 '>
+        <Navigation path='/' title='Home' icon={faHouse}/>
+        <MotionShape className="absolute rounded-full rotate-45 size-32 bg-shapes top-1/10 right-1/6" reverse={true}/>
+        <MotionShape className="absolute top-1/4 right-1/2 rotate-45 size-64 bg-shapes" reverse={true}/>
+        <MotionShape className="absolute bottom-1/6 right-1/3 inline-block w-0 h-0 border-solid border-t-0 border-r-[73.5px] border-l-[73.5px] border-b-[127.3px] border-l-transparent border-r-transparent border-t-transparent border-b-shapes"/>
+        <div className='flex flex-col justify-center lg:w-1/2 w-full space-y-8 z-10 p-1/14 '>
             <h2>
                 Nice to meet you, <br/> I'm Kai  <AnimatedIcon />
             </h2>
@@ -26,9 +30,15 @@ const AboutMe: React.FC = () => {
                 </p>
             </div>
         </div>
-        <div className='h-full lg:w-1/2 w-screen z-10'>
-
-        </div>
+        <div className='h-full lg:w-1/2 w-screen z-10 flex justify-center items-center'>
+        <Image
+            className='rounded-3xl'
+            src={'/About/Redback2024TeamPhoto.jpeg'}
+            alt='Redback Racing 2024 Team Photo'
+            width={720}
+            height={420}
+        />
+    </div>
     </div>
   );
 };

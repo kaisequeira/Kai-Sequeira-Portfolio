@@ -4,6 +4,7 @@ import MotionShape from '../_Global/MotionShape';
 import { faSchool } from '@fortawesome/free-solid-svg-icons';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import '@/app/globals.css';
 import Label from '../_Global/Label';
 import ScrollDownButton from './ArrowDown';
@@ -13,7 +14,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="bg-bgr w-screen h-screen flex flex-col md:space-y-14 space-y-8 items-center justify-center">
-      <Navigation/>
+      <Navigation path='/about' title='About Me' icon={faCircleUser}/>
       <ScrollDownButton/>
       <MotionShape className="absolute bottom-1/4 left-1/6 rotate-12 md:size-40 size-28 bg-shapes"/>
       <MotionShape className="absolute rounded-full rotate-45 size-28 bg-shapes bottom-1/10 md:left-1/4 right-1/6" reverse={true}/>

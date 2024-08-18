@@ -16,7 +16,6 @@ export default function Page() {
         <main className={`${jakartaSans.className} w-screen flex flex-col bg-bgr`}>
             <LenisWrapper>
                 <Home />
-                {/* <Technologies /> */}
                 <Projects />
                 <Footer />
                 <ResetScrollButton />
