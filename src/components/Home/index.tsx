@@ -12,7 +12,7 @@ import Navigation from './Navigation';
 const Home: React.FC = () => {
 
   return (
-    <div className="bg-bgr w-screen h-screen flex flex-col md:space-y-11 space-y-6 items-center justify-center">
+    <div className="bg-bgr w-screen h-screen flex flex-col md:space-y-20 space-y-6 items-center justify-center">
       <Navigation/>
       <ScrollDownButton/>
       <MotionShape className="absolute bottom-1/4 left-1/6 rotate-12 size-40 bg-shapes"/>
@@ -23,19 +23,27 @@ const Home: React.FC = () => {
         <h1 className="text-center z-10">
           Kai Sequeira
         </h1>
-          <h4 className="z-10 text-center">
-            Full stack software engineering student
-          </h4>
-          <div className='flex flex-row justify-center gap-4'>
-            <Label title="Institution" note="UNSW" children={<FontAwesomeIcon className='text-content font-semibold' icon={faSchool} />} />
-            <Label title="Location" note="Sydney" children={<FontAwesomeIcon className='text-content font-semibold' icon={faLocationDot} />} />           
-          </div>
+        <h4 className="z-10 text-center">
+          Full stack software engineering student
+        </h4>
+        <div className='flex flex-row justify-center gap-4'>
+          <Label title="Institution" note="UNSW" children={<FontAwesomeIcon className='text-content font-semibold' icon={faSchool} />} />
+          <Label title="Location" note="Sydney" children={<FontAwesomeIcon className='text-content font-semibold' icon={faLocationDot} />} />           
+        </div>
       </div>
-      <div className='flex md:space-x-4 space-x-2 z-10'>
-        <ContactCircle type="Github" />
-        <ContactCircle type="Linkedin" />
-        <ContactCircle type="Resume" />
-        <ContactCircle type="Email" />
+      <div className='flex md:space-x-8 space-x-2 z-10 relative'>
+        <div className="contact-circle-wrapper transform -rotate-12">
+          <ContactCircle type="Github" />
+        </div>
+        <div className="contact-circle-wrapper transform -rotate-3 -translate-y-5">
+          <ContactCircle type="LinkedIn" />
+        </div>
+        <div className="contact-circle-wrapper transform rotate-3 -translate-y-5">
+          <ContactCircle type="Resume" />
+        </div>
+        <div className="contact-circle-wrapper transform rotate-12">
+          <ContactCircle type="Email" />
+        </div>
       </div>
     </div>
   );
