@@ -2,54 +2,49 @@
 
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFloppyDisk, faPaste, faSquareArrowUpRight, faFileArrowDown  } from '@fortawesome/free-solid-svg-icons';
-import {  } from '@fortawesome/free-solid-svg-icons';
+import { faAddressCard, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 const ClientFooter: React.FC = () => {
     const EMAIL = 'kai.sequeira2003@gmail.com';
 
-    function copyText(){
-        navigator.clipboard.writeText(EMAIL);
-    }
-
     return (
-        <div className='flex flex-row lg:space-x-8 space-x-4 flex-wrap justify-center gap-y-2'>
+        <div className='flex flex-col space-y-4 items-end'>
             <a
-                className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr items-center'
+                className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr w-fit'
                 href='https://github.com/kaisequeira'
                 target='_blank'
                 rel='noopener noreferrer'
             >
-                <p className='font-extrabold text-bgr'>Github</p>
-                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faSquareArrowUpRight} />
+                <p className='font-extrabold text-bgr justify-end'>Github</p>
+                <FontAwesomeIcon className='text-bgr lg:size-5 size-4' icon={faGithub} />
             </a>
             <a
-                className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr items-center'
+                className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr w-fit'
                 href='https://www.linkedin.com/in/kai-sequeira-3b49602ba/'
                 target='_blank'
                 rel='noopener noreferrer'
             >
                 <p className='font-extrabold text-bgr'>LinkedIn</p>
-                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faSquareArrowUpRight} />
+                <FontAwesomeIcon className='text-bgr lg:size-5 size-4' icon={faLinkedin} />
             </a>
             <a
-                className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr items-center'
+                className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr w-fit'
                 href='/KaiSequeiraResume.pdf'
-                download={'KaiSequeiraResume.pdf'}
+                target='_blank'
             >
                 <p className='font-extrabold text-bgr'>Resume</p>
-                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faFileArrowDown} />
+                <FontAwesomeIcon className='text-bgr lg:size-5 size-4' icon={faAddressCard} />
             </a>
             <a
-                className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr items-center'
+                className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr w-fit'
                 href='#'
                 onClick={(event) => {
-                    event.preventDefault();
-                    copyText();
+                    window.location.href = `mailto:${EMAIL}`;
                 }}
             >
                 <p className='font-extrabold text-bgr'>Email</p>
-                <FontAwesomeIcon className='text-bgr lg:size-6 size-4' icon={faPaste} />
+                <FontAwesomeIcon className='text-bgr lg:size-5 size-4' icon={faEnvelope} />
             </a>
         </div>
     );

@@ -8,7 +8,7 @@ import { faFileArrowDown, faEnvelope, faAddressCard, faSquareArrowUpRight, faPas
 import { useRouter } from 'next/navigation';
 
 
-type ContactType = "Github" | "LinkedIn" | "Resume" | "Email" | "My stack";
+type ContactType = "Github" | "LinkedIn" | "Resume" | "Email" | "Toolkit";
 
 interface ContactCircleProps {
     type: ContactType;
@@ -62,12 +62,13 @@ const ContactCircle: React.FC<ContactCircleProps> = ({ type }) => {
                 navigator.clipboard.writeText(EMAIL);
             };
             break;
-        case "My stack":
+        case "Toolkit":
             icon = <FontAwesomeIcon className='size-5/12 text-offwhite' icon={faToolbox} />;
             actionIcon = faPlay;
             color = 'var(--gradient-acc5)';
             onClick = () => router.push('/play');
             break;
+            // TODO: Create animation that transitions to tech stack game
         default:
             throw new Error("Invalid contact type");
     }

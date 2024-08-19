@@ -41,7 +41,7 @@ export default function ResetScrollButton({ className }: ResetScrollButtonProps)
 
     return (
         <motion.button
-            className='md:size-14 size-10 bg-offwhite rounded-full origin-center fixed bottom-0 left-0 md:m-8 m-4 mix-blend-difference z-10'
+            className='hidden sm:block md:size-14 size-10 bg-offwhite rounded-full origin-center fixed bottom-0 left-0 md:m-8 m-4 mix-blend-difference z-10'
             onTap={scrollToTop}
             initial={{ opacity: 0 }}
             onMouseEnter={() => setHovered(true)}

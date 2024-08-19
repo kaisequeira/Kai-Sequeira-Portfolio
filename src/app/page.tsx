@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Projects from "@/components/Projects";
 import ResetScrollButton from "@/components/_Global/ResetScrollButton";
 import './globals.css';
+import AboutMe from "@/components/AboutMe";
 
 const jakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -16,6 +17,7 @@ export default function Page() {
         <main className={`${jakartaSans.className} w-screen flex flex-col bg-bgr`}>
             <LenisWrapper>
                 <Home />
+                <AboutMe />
                 <Projects />
                 <Footer />
                 <ResetScrollButton />

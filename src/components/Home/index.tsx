@@ -4,17 +4,14 @@ import MotionShape from '../_Global/MotionShape';
 import { faSchool } from '@fortawesome/free-solid-svg-icons';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import '@/app/globals.css';
 import Label from '../_Global/Label';
 import ScrollDownButton from './ArrowDown';
-import Navigation from './Navigation';
 
 const Home: React.FC = () => {
 
   return (
     <div className="bg-bgr w-screen h-screen flex flex-col md:space-y-14 space-y-8 items-center justify-center">
-      <Navigation path='/about' title='About Me' icon={faCircleUser}/>
       <ScrollDownButton/>
       <MotionShape className="absolute bottom-1/4 left-1/6 rotate-12 md:size-40 size-28 bg-shapes"/>
       <MotionShape className="absolute rounded-full rotate-45 size-28 bg-shapes bottom-1/10 md:left-1/4 right-1/6" reverse={true}/>
@@ -25,7 +22,7 @@ const Home: React.FC = () => {
           Kai Sequeira
         </h1>
         <h4 className="z-10 text-center">
-          Full stack software engineering student
+          Full stack software engineering student @ Redback Racing
         </h4>
         <div className='flex flex-row justify-center gap-4'>
           <Label title="Institution" note="UNSW" children={<FontAwesomeIcon className='text-content font-semibold' icon={faSchool} />} />
@@ -40,7 +37,7 @@ const Home: React.FC = () => {
           <ContactCircle type="LinkedIn" />
         </div>
         <div className="contact-circle-wrapper transform">
-          <ContactCircle type="My stack" />
+          <ContactCircle type="Toolkit" />
         </div>
         <div className="contact-circle-wrapper transform rotate-3 md:translate-y-1 translate-y-0.5">
           <ContactCircle type="Resume" />

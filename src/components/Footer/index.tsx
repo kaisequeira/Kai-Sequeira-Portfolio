@@ -6,26 +6,24 @@ import ClientFooter from './ClientFooter'
 export default function Footer() {
     return (
         <div 
-        className='relative md:h-[35vh] sm:h-[45vh] h-[60vh]'
+        className='relative lg:h-[35vh] sm:h-[45vh] h-[60vh]'
         style={{clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)"}}
         >
-            <div className='fixed bottom-0 md:h-[35vh] sm:h-[45vh] h-[60vh] w-full'>
-                <div className='bg-content lg:flex-row flex-col flex justify-center items-center w-full h-full'>
-                    <div className='w-1/6 lg:h-full h-0'>
-                    </div>
-                    <div className='flex flex-col justify-center lg:w-2/3 w-full lg:space-y-12 space-y-8 place- pl-1/11 pr-1/11'>
-                        <p className='text-bgr text-center'>
+            <div className='fixed bottom-0 lg:h-[35vh] sm:h-[45vh] h-[60vh] w-full bg-content flex justify-center items-center'>
+                <div className='flex-row flex items-center 2xl:w-[1350px] lg:w-[800px] w-[350px] h-full'>
+                    <div className='flex flex-col justify-start space-y-8 w-1/2 pr-1/11'>
+                        <p className='text-bgr text-left'>
                             Thanks for scrolling to the end. If you’re looking for someone with my skills, feel free to contact me on any of my socials.
                         </p>
-                        <ClientFooter />
-                        <p className='text-bgr font-extralight text-center'>
+                        <p className='text-bgr font-extralight text-left'>
                             Developed with Next JS, Matter JS, Tailwind CSS & Framer Motion
                         </p>
-                    </div>
-                    <div className='lg:w-1/6 w-full lg:h-full h-auto pt-5 flex flex-col justify-end'>
-                        <p className='text-bgr font-extralight lg:text-end text-center lg:p-8 p-0'>
+                        <p className='text-bgr font-extralight text-left'>
                             © Kai Sequeira 2024
                         </p>
+                    </div>
+                    <div className='flex flex-col justify-end space-y-8 w-1/2'>
+                        <ClientFooter />
                     </div>
                 </div>
             </div>
