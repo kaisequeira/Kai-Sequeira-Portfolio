@@ -8,7 +8,7 @@ interface LabelProps {
 
 const Label: React.FC<LabelProps> = ({ title, note, children }) => {
     return (
-        <div className="flex items-center space-x-2">
+        <div className="flex flex-row items-center gap-2">
             {title !== undefined && (<p className="flex font-semibold">
                 {title}
             </p>)}

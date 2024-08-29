@@ -15,7 +15,7 @@ const ProjectPane: React.FC<ProjectPaneProps> = ({ className, colour, children, 
         <div className={'rounded-3xl h-full w-full'} style={{ backgroundImage: colour }}>
             {children}
         </div>
-        <div className="flex flex-row space-x-4 pt-6 justify-start w-full">
+        <div className="flex flex-row gap-4 pt-6 justify-start w-full">
           <Label title={title} note={note}/>
         </div>
     </div>

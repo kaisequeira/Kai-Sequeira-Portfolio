@@ -9,7 +9,7 @@ const ClientFooter: React.FC = () => {
     const EMAIL = 'kai.sequeira2003@gmail.com';
 
     return (
-        <div className='flex flex-col space-y-4 items-end'>
+        <div className='flex flex-col gap-4 items-end'>
             <a
                 className='flex flex-row lg:gap-4 gap-2 hover:underline decoration-bgr w-fit'
                 href='https://github.com/kaisequeira'

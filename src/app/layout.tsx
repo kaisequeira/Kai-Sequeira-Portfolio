@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import Navbar from "@/components/_Global/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const jakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ['200', '300', '400', '500', '600', '700'],
+});
 
 export const metadata: Metadata = {
   title: "Kai Sequeira",
@@ -17,7 +21,8 @@ export default function RootLayout({
   
   return (
     <html lang="en" className="overflow-y-auto !no-scrollbar overflow-x-clip">
-      <body suppressHydrationWarning={true} className={inter.className}>
+      <body suppressHydrationWarning={true} className={`${jakartaSans.className} relative`}>
+        <Navbar />
         {children}
       </body>
     </html>

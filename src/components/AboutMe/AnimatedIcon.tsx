@@ -24,8 +24,7 @@ const AnimatedIcon: React.FC = () => {
 
     return (
         <motion.button
-            className='w-14 md:w-28 text-3xl md:text-6xl rounded-full inline-block origin-center text-center text-'
-            whileHover={{ scale: 1.1 }}
+            className='w-14 md:w-20 text-3xl md:text-5xl rounded-full inline-block origin-center text-center text-'
             onClick={handleClick}
             animate={controls}
         >
