@@ -3,64 +3,85 @@
 @tailwind utilities;
 
 * {
-  /* cursor: none; */
-  /* pointer-events: none; */
+    /* cursor: none; */
+    /* pointer-events: none; */
 }
 
 @layer base {
-  :root {
-    --color-offwhite: 240, 240, 240;
-    --color-offblack: 15, 15, 15;
-    --color-shapes: 127, 127, 127, 0.3;
-    --color-subtitle: 95, 95, 95;
-    --gradient-acc1: linear-gradient(90deg, rgb(66, 133, 244), rgb(26, 90, 193));
-    --gradient-acc2: linear-gradient(90deg, rgb(122, 60, 208), rgb(160, 59, 214));
-    --gradient-acc3: linear-gradient(90deg, rgb(251, 188, 5), rgb(249, 151, 4));
-    --gradient-acc4: linear-gradient(90deg, rgb(234, 67, 53), rgb(207, 74, 30));
-    --gradient-acc5: linear-gradient(90deg, rgb(52, 168, 83), rgb(17, 126, 28));
-    --color-bgr: var(--color-offwhite);
-    --color-content: var(--color-offblack);
-  }
-  @media (prefers-color-scheme: dark) {
     :root {
-      --color-bgr: var(--color-offblack);
-      --color-content: var(--color-offwhite);
-      --color-subtitle: 160, 160, 160;
+        --color-offwhite: 240, 240, 240;
+        --color-offblack: 15, 15, 15;
+
+        --color-bgr: var(--color-offwhite);
+        --color-content: var(--color-offblack);
+        --color-subtitle: 95, 95, 95;
+
+        --gradient-acc1: linear-gradient(
+            90deg,
+            rgb(66, 133, 244),
+            rgb(26, 90, 193)
+        );
+        --gradient-acc2: linear-gradient(
+            90deg,
+            rgb(122, 60, 208),
+            rgb(160, 59, 214)
+        );
+        --gradient-acc3: linear-gradient(
+            90deg,
+            rgb(251, 188, 5),
+            rgb(249, 151, 4)
+        );
+        --gradient-acc4: linear-gradient(
+            90deg,
+            rgb(234, 67, 53),
+            rgb(207, 74, 30)
+        );
+        --gradient-acc5: linear-gradient(
+            90deg,
+            rgb(52, 168, 83),
+            rgb(17, 126, 28)
+        );
     }
-  }
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --color-bgr: var(--color-offblack);
+            --color-content: var(--color-offwhite);
+            --color-subtitle: 160, 160, 160;
+        }
+    }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .text-balance {
+        text-wrap: balance;
+    }
     /* Hide scrollbar for Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
     /* Hide scrollbar for IE, Edge and Firefox */
-  .no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
+    .no-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
 }
 
 h1 {
-  @apply text-content lg:text-9xl md:text-8xl sm:text-7xl text-5xl font-semibold select-none;
+    @apply text-content lg:text-9xl md:text-8xl sm:text-7xl text-5xl font-semibold select-none;
 }
 
 h2 {
-  @apply text-content lg:text-6xl md:text-6xl sm:text-5xl text-4xl font-bold select-none;
+    @apply text-content lg:text-6xl md:text-6xl sm:text-5xl text-4xl font-bold select-none;
 }
 
 h3 {
-  @apply text-content lg:text-xl md:text-lg text-base font-light pl-1/11 pr-1/11 select-none;
+    @apply text-content lg:text-xl md:text-lg text-base font-light pl-1/11 pr-1/11 select-none;
 }
 
 h4 {
-  @apply text-content lg:text-2xl md:text-2xl sm:text-xl text-lg font-light pl-1/11 pr-1/11 select-none;
+    @apply text-content lg:text-2xl md:text-2xl sm:text-xl text-lg font-light pl-1/11 pr-1/11 select-none;
 }
 
 p {
-  @apply text-content lg:text-xl md:text-lg sm:text-base text-base font-light select-none;
+    @apply text-content text-base font-light select-none;
 }
