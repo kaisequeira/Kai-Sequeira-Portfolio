@@ -1,6 +1,6 @@
 'use client'
 
-import React, { act, MouseEvent, useState } from 'react'
+import React, { MouseEvent, useState } from 'react'
 import { motion } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
@@ -10,12 +10,13 @@ import {
     faAddressCard,
     faSquareArrowUpRight,
     faPaste,
+    faQuestion,
+    faPlay,
     faCircleCheck,
-    faUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
 
-type ContactType = 'Github' | 'LinkedIn' | 'Resume' | 'Email' | 'About'
+type ContactType = 'Github' | 'LinkedIn' | 'Resume' | 'Email' | 'Play'
 
 interface ContactBoxProps {
     type: ContactType
@@ -29,7 +30,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
         color: string,
         successTitle: string | undefined = undefined,
         onClick: (event: MouseEvent<HTMLButtonElement>) => void,
-        actionIcon: any
+        actionIcon: any;
     const router = useRouter()
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -103,14 +104,14 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
                 navigator.clipboard.writeText(EMAIL)
             }
             break
-        case 'About':
+        case 'Play':
             icon = (
                 <FontAwesomeIcon
                     className="size-5/12 text-offwhite"
-                    icon={faUser}
+                    icon={faQuestion}
                 />
             )
-            actionIcon = faSquareArrowUpRight
+            actionIcon = faPlay
             color = 'var(--gradient-acc5)'
             onClick = () => setTimeout(() => router.push('/about'), 300)
             break
@@ -137,7 +138,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
             </motion.button>
             <motion.div
                 style={{ backgroundImage: color }}
-                className="absolute top-full mt-6 rounded-3xl h-11 w-36 hidden md:flex flex-row justify-center items-center gap-x-2"
+                className="absolute top-full mt-6 rounded-3xl h-11 w-36 hidden md:tall:flex flex-row justify-center items-center gap-x-2"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
                 exit={{ opacity: 0, y: 10 }}

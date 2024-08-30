@@ -34,12 +34,12 @@ const AnimatedIcon: React.FC = () => {
 
         setTimeout(() => {
             setIconIndex((prevIndex) => (prevIndex + 1) % icons.length)
-        }, 300) // Change icon at the midpoint of the 1-second rotation
+        }, 300)
     }
 
     return (
         <motion.button
-            className="w-14 md:w-20 text-3xl md:text-5xl rounded-full inline-block origin-center text-center text-"
+            className="w-14 md:w-20 text-3xl xs:text-4xl md:text-5xl rounded-full inline-block origin-center text-center text-"
             onClick={handleClick}
             animate={controls}
         >

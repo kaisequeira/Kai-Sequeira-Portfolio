@@ -21,7 +21,7 @@ export default function ScrollDownButton() {
 
     return (
         <motion.button
-            className="md:size-14 size-14 pb-10 md:m-8 m-4"
+            className="md:size-14 size-14 pb-10 md:m-8 m-4 z-20"
             onTap={scrollToProjects}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}

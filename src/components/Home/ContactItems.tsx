@@ -3,24 +3,22 @@ import ContactBox from './ContactBox'
 
 export default function ContactItems() {
     return (
-        <div className="md:flex grid grid-cols-6 relative md:gap-6 gap-4">
-            <div className="md:transform -rotate-6 translate-y-4 transform-none col-span-2">
+        <div className="md:flex grid grid-cols-3 relative md:gap-8 gap-4">
+            <div className="md:transform -rotate-6 translate-y-4 transform-none">
                 <ContactBox type="Github" />
             </div>
-            <div className="md:transform -rotate-3 translate-y-1 transform-none col-span-2">
+            <div className="md:transform -rotate-3 translate-y-1 transform-none">
                 <ContactBox type="LinkedIn" />
             </div>
-            <div className="transform col-span-2">
-                <ContactBox type="About" />
+            <div className="transform">
+                <ContactBox type="Play" />
             </div>
-            <div className="col-span-1 md:hidden visible" />
-            <div className="md:transform rotate-3 md:translate-y-1 transform-none col-span-2">
+            <div className="md:transform rotate-3 md:translate-y-1 transform-none">
                 <ContactBox type="Resume" />
             </div>
-            <div className="md:transform rotate-6 md:translate-y-4 transform-none col-span-2">
+            <div className="md:transform rotate-6 md:translate-y-4 transform-none">
                 <ContactBox type="Email" />
             </div>
-            <div className="col-span-1 md:hidden visible" />
         </div>
     )
 }

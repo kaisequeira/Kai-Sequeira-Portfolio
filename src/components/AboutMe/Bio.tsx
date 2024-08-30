@@ -26,22 +26,22 @@ const Bio: React.FC<BioProps> = ({ className }) => {
                 <div
                     className={`space-y-8 ${isExpanded ? 'line-clamp-none' : 'line-clamp-6'} md:line-clamp-none`}
                 >
-                    <p className="text-content font-normal md:text-xl text-lg">
+                    <p className="text-content font-normal md:text-xl sm:text-lg text-base">
                         I am currently in my third year at UNSW, pursuing a
                         double Bachelor&apos;s degree in Software Engineering
                         (Honours) and Commerce, with a major in Finance.
                     </p>
-                    <p className="text-content font-normal md:text-xl text-lg">
+                    <p className="text-content font-normal md:text-xl sm:text-lg text-base">
                         As a Software Engineer with UNSW Redback Racing, my role
                         encompasses full-stack development where I deploy
                         microservices, develop cloud solutions to help race
                         engineers manage data and design frontend interfaces to
                         abstract this logic.
                     </p>
-                    <p className="text-content font-extralight md:text-xl text-lg">
+                    <p className="text-content font-extralight md:text-xl sm:text-lg text-base">
                         Beyond the keyboard,
                     </p>
-                    <p className="font-normal text-content md:text-xl text-lg">
+                    <p className="font-normal text-content md:text-xl sm:text-lg text-base">
                         My interests extend to photography, game design and
                         anything that allows me to express my creativity. When
                         I’m not studying at home, I’ll take any opportunity to
@@ -49,7 +49,7 @@ const Bio: React.FC<BioProps> = ({ className }) => {
                         my travels.
                     </p>
                 </div>
-                <p className="text-left md:hidden visible md:text-xl text-lg">
+                <p className="text-left md:hidden visible md:text-xl sm:text-lg text-base">
                     {isExpanded ? 'See less...' : 'See more...'}
                 </p>
             </div>
