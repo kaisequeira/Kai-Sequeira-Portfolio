@@ -30,7 +30,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
         color: string,
         successTitle: string | undefined = undefined,
         onClick: (event: MouseEvent<HTMLButtonElement>) => void,
-        actionIcon: any;
+        actionIcon: any
     const router = useRouter()
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
