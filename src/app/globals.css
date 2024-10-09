@@ -2,21 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    /* cursor: none; */
-    /* pointer-events: none; */
-}
-
-main::after {
+.grain-effect::before {
     content: '';
     background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png');
-    background-size: 15%;
+    background-size: 20%;
     height: 300%;
     width: 300%;
     position: fixed;
-    opacity: 0.05;
+    opacity: 0.025;
     pointer-events: none;
     animation: animateGrain 8s steps(10) infinite;
+    z-index: 1;
+}
+
+html {
+    position: relative;
 }
 
 @keyframes animateGrain {
@@ -64,6 +64,7 @@ main::after {
         --color-bgr: var(--color-offwhite);
         --color-content: var(--color-offblack);
         --color-subtitle: 95, 95, 95;
+        --color-overlay: 0, 0, 0, 0.45;
 
         --gradient-acc1: linear-gradient(
             90deg,
@@ -96,6 +97,7 @@ main::after {
             --color-bgr: var(--color-offblack);
             --color-content: var(--color-offwhite);
             --color-subtitle: 160, 160, 160;
+            /* --color-overlay: 255, 255, 255, 0.3; */
         }
     }
 }

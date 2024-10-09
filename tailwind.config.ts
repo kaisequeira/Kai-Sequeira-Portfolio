@@ -21,6 +21,7 @@ const config: Config = {
                 subtitle: 'rgb(var(--color-subtitle))',
                 offwhite: 'rgb(var(--color-offwhite))',
                 offblack: 'rgb(var(--color-offblack))',
+                overlay: 'rgb(var(--color-overlay))',
             },
             spacing: {
                 '1/5': '20%',
@@ -36,6 +37,8 @@ const config: Config = {
             padding: {
                 '1/11': '9.090909%',
                 '1/14': '7.142857%',
+                '1/16': '6.25%',
+                '1/20': '5%',
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -55,6 +58,9 @@ const config: Config = {
             },
             borderRadius: {
                 '5xl': '5rem',
+            },
+            boxShadow: {
+                'thick': '15px 15px 15px rgba(0, 0, 0, 0.5)',
             },
         },
         screens: {

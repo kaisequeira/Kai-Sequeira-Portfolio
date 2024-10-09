@@ -17,10 +17,12 @@ const Label: React.FC<LabelProps> = ({
         <div
             className={`flex lg:flex-row lg:items-center ${unresponsive ? 'flex-row items-center' : 'flex-col items-start'} gap-2`}
         >
-            {title !== undefined && (
-                <p className="flex font-semibold">{title}</p>
-            )}
-            {children}
+            <div className='flex flex-row gap-2'>
+                {title !== undefined && (
+                    <p className="flex font-semibold">{title}</p>
+                )}
+                {children}
+            </div>
             {note !== undefined && (
                 <>
                     <p
