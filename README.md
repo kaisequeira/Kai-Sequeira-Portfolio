@@ -1,39 +1,73 @@
-# kai-sequeira-portfolio
+# Kai Sequeira's Portfolio Website
 
-A portfolio to demonstrate my technical proficiency as a fullstack developer.
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Welcome to the repository for my personal portfolio website. This site showcases my projects, skills, and experiences as a software engineer studying at UNSW @ Redback Racing.
 
-## Getting Started
+## 🌐 Live Website
 
-First, run the development server:
+[Visit my portfolio]()
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🛠️ Technologies Used
+
+This portfolio is built with modern web technologies, demonstrating my proficiency in:
+
+- [Next.js](https://nextjs.org/) - React framework for production-grade applications
+- [TypeScript](https://www.typescriptlang.org/) - Typed superset of JavaScript
+- [Framer Motion](https://www.framer.com/motion/) - Animation library for React
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Font Awesome](https://fontawesome.com/) - Icon library and toolkit
+- [Matter.js](https://brm.io/matter-js/) - 2D physics engine for the web
+- [Lenis](https://lenis.darkroom.engineering/) - Smooth scroll library
+
+## 🚀 Featured Projects
+
+### Emberscape
+A 2D pixel art survival game currently in progress. Created using C# and the Godot game engine. 
+
+### Crab Crawler
+A 2D pixel art platformer game developed using Unity and C#, demonstrating my game development capabilities and object oriented programming and app deployment on WebGL.
+
+### UNSW Redback Racing Portfolio
+- Log Management Rework: Improved the efficiency and user experience of the team's log management system.
+- Spyder Telemetry UI Rework: Redesigned, refactored and implemented a modern, accessible UI using the shadcn/ui component library replacing the old MUI libraries.
+
+## 💻 Skills Showcase
+
+This portfolio demonstrates my proficiency in:
+
+- HTML5, CSS3, and modern JavaScript (ES6+)
+- TypeScript for type-safe code
+- Responsive and accessible web design
+- Interactive animations and physics-based effects
+- Server-side rendering and static site generation with Next.js
+- Git version control and collaborative development
+
+## 🔗 Connect With Me
+
+- GitHub: [github.com/kaisequeira](https://github.com/kaisequeira)
+- LinkedIn: [Kai Sequeira](www.linkedin.com/in/kai-sequeira-3b49602ba)
+- Email: kai.sequeira2003@gmail.com
+
+## 🚀 Getting Started
+
+To run this project locally:
+
+1. Clone the repository
+2. Install dependencies
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Run the development server
+```
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 📄 License
 
-## Learn More
+This project is available under the [MIT License](LICENSE).
 
-To learn more about Next.js, take a look at the following resources:
+---
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Developed with ❤️ by Kai Sequeira
