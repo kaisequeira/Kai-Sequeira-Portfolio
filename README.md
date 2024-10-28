@@ -2,6 +2,10 @@
 
 Welcome to the repository for my personal portfolio website. This site showcases my projects, skills, and experiences as a software engineer studying at UNSW @ Redback Racing.
 
+![image](https://github.com/user-attachments/assets/3fc9a64e-99cc-452d-8aa6-5b21c8f61e7e)
+
+![image](https://github.com/user-attachments/assets/b1c092e0-9962-492b-a9fc-09a7c363aba5)
+
 ## 🌐 Live Website
 
 [Visit my portfolio]()
@@ -66,7 +70,7 @@ npm run dev
 
 ## 📄 License
 
-This project is available under the [MIT License](LICENSE).
+This project contains no licensing and, thus, is protected under the default copyright laws.
 
 ---
 
