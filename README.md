@@ -72,6 +72,10 @@ npm run dev
 
 This project contains no licensing and, thus, is protected under the default copyright laws.
 
+## 🤝 Contact
+
+Kai Sequeira - [GitHub](https://github.com/kaisequeira)
+
 ---
 
 Developed with ❤️ by Kai Sequeira
