@@ -5,6 +5,7 @@ import Projects from '@/components/Projects'
 import ResetScrollButton from '@/components/_Global/ResetScrollButton'
 import './globals.css'
 import AboutMe from '@/components/AboutMe'
+import PhysicsGame from '@/components/PhysicsGame/PhysicsGame'
 
 export default function Page() {
     return (

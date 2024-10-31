@@ -64,7 +64,15 @@ html {
         --color-bgr: var(--color-offwhite);
         --color-content: var(--color-offblack);
         --color-subtitle: 95, 95, 95;
-        --color-overlay: 0, 0, 0, 0.45;
+
+        --color-secondary: 127, 127, 127, 0.2;
+        --color-overlay: 0, 0, 0, 0.65;
+
+        --color-acc1: 66, 133, 244;
+        --color-acc2: 122, 60, 208;
+        --color-acc3: 251, 188, 5;
+        --color-acc4: 234, 67, 53;
+        --color-acc5: 52, 168, 83;
 
         --gradient-acc1: linear-gradient(
             90deg,
@@ -118,7 +126,7 @@ html {
 }
 
 h1 {
-    @apply text-content lg:text-9xl md:text-8xl sm:text-7xl text-5xl font-semibold select-none;
+    @apply text-content lg:text-8xl md:text-8xl sm:text-7xl text-5xl font-semibold select-none;
 }
 
 h2 {
@@ -126,11 +134,15 @@ h2 {
 }
 
 h3 {
-    @apply text-content lg:text-xl md:text-lg text-base font-light select-none;
+    @apply text-content lg:text-4xl md:text-3xl sm:text-2xl text-xl font-bold select-none;
 }
 
 h4 {
     @apply text-content lg:text-2xl md:text-2xl sm:text-xl text-lg font-light select-none;
+}
+
+h5 {
+    @apply text-content lg:text-xl md:text-xl sm:text-lg font-light select-none;
 }
 
 p {

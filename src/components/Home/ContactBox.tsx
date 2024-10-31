@@ -15,6 +15,7 @@ import {
     faCircleCheck,
 } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
+import { useGameContext } from '../PhysicsGame/GameContext'
 
 type ContactType = 'Github' | 'LinkedIn' | 'Resume' | 'Email' | 'Play'
 
@@ -37,6 +38,8 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
         setClicked(true)
         if (onClick) onClick(event)
     }
+
+    const { setGameLoaded } = useGameContext()
 
     switch (type) {
         case 'Github':
@@ -113,7 +116,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
             )
             actionIcon = faPlay
             color = 'var(--gradient-acc5)'
-            onClick = () => setTimeout(() => router.push('/about'), 300)
+            onClick = () => setGameLoaded(true)
             break
         // TODO: Create animation that transitions to tech stack game
         default:
@@ -129,10 +132,12 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
                 style={{ backgroundImage: color }}
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -10 }}
                 onClick={handleClick}
             >
-                <span className={`flex items-center justify-center text-white`}>
+                <span
+                    className={`flex items-center justify-center text-offwhite`}
+                >
                     {icon}
                 </span>
             </motion.button>

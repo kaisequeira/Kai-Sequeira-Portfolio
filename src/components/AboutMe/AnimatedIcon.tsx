@@ -21,42 +21,41 @@ const icons = [
 ]
 
 const AnimatedIcon: React.FC = () => {
-    const [iconIndex, setIconIndex] = useState(0);
-    const [isHovered, setIsHovered] = useState(false);
+    const [iconIndex, setIconIndex] = useState(0)
+    const [isHovered, setIsHovered] = useState(false)
 
-    const [isSpinning, setIsSpinning] = useState(false);
-    
-    const controls = useAnimation();
-    const isMdOrAbove = useMediaQuery({ query: '(min-width: 768px)' });
+    const [isSpinning, setIsSpinning] = useState(false)
+
+    const controls = useAnimation()
+    const isLgOrAbove = useMediaQuery({ query: '(min-width: 1024px)' })
 
     useEffect(() => {
-        if (isSpinning)
-            return;
-        
-        if (isHovered || !isMdOrAbove) {
+        if (isSpinning) return
+
+        if (isHovered || !isLgOrAbove) {
             controls.start({
                 rotate: 0,
                 transition: {
                     duration: 0.05,
                 },
-            });
-            return;
+            })
+            return
         }
 
         controls.start({
             rotate: [0, 0, -10, 10, -10, 10, -10, 0],
             transition: {
                 duration: 2,
-                ease: "easeInOut",
+                ease: 'easeInOut',
                 times: [0, 0.5, 0.575, 0.65, 0.725, 0.8, 0.875, 1],
                 repeat: Infinity,
                 repeatDelay: 4,
             },
-        });
-    }, [isHovered, isMdOrAbove, controls, isSpinning]);
+        })
+    }, [isHovered, isLgOrAbove, controls, isSpinning])
 
     const handleClick = async () => {
-        setIsSpinning(true);
+        setIsSpinning(true)
         controls.start({
             rotate: [0, -10, -15, 45, 180, 360, 375, 360],
             transition: {
@@ -67,17 +66,17 @@ const AnimatedIcon: React.FC = () => {
 
         setTimeout(() => {
             setIconIndex((prevIndex) => (prevIndex + 1) % icons.length)
-        }, 300);
+        }, 300)
     }
 
     return (
         <motion.button
-            className="w-14 md:w-20 text-3xl xs:text-4xl md:text-5xl rounded-full inline-block origin-center text-center text-"
+            className="w-14 md:w-20 text-3xl xs:text-4xl md:text-5xl rounded-full inline-block origin-center text-center"
             onHoverStart={() => setIsHovered(true)}
             onHoverEnd={() => setIsHovered(false)}
             onAnimationComplete={() => {
-                controls.set({ rotate: 0 });
-                setIsSpinning(false);
+                controls.set({ rotate: 0 })
+                setIsSpinning(false)
             }}
             disabled={isSpinning}
             onClick={handleClick}

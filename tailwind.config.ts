@@ -22,6 +22,7 @@ const config: Config = {
                 offwhite: 'rgb(var(--color-offwhite))',
                 offblack: 'rgb(var(--color-offblack))',
                 overlay: 'rgb(var(--color-overlay))',
+                secondary: 'rgb(var(--color-secondary))',
             },
             spacing: {
                 '1/5': '20%',
@@ -30,6 +31,7 @@ const config: Config = {
                 '1/10': '10%',
             },
             lineClamp: {
+                8: '8',
                 12: '12',
                 15: '15',
                 20: '20',
@@ -60,7 +62,7 @@ const config: Config = {
                 '5xl': '5rem',
             },
             boxShadow: {
-                'thick': '15px 15px 15px rgba(0, 0, 0, 0.5)',
+                thick: '15px 15px 15px rgba(0, 0, 0, 0.5)',
             },
         },
         screens: {

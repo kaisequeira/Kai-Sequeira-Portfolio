@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { useLenis } from '../_Global/LenisWrapper'
 import { motion } from 'framer-motion'
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 
 export default function ScrollDownButton() {
     const [hovered, setHovered] = React.useState(false)

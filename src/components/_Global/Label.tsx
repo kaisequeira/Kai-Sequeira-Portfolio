@@ -17,7 +17,7 @@ const Label: React.FC<LabelProps> = ({
         <div
             className={`flex lg:flex-row lg:items-center ${unresponsive ? 'flex-row items-center' : 'flex-col items-start'} gap-2`}
         >
-            <div className='flex flex-row gap-2'>
+            <div className="flex flex-row gap-2 items-center">
                 {title !== undefined && (
                     <p className="flex font-semibold">{title}</p>
                 )}
