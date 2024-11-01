@@ -1,190 +1,199 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import {
-    Engine,
-    Render,
-    World,
-    Bodies,
-    Mouse,
-    MouseConstraint,
-    Composite,
-} from 'matter-js'
 import Matter from 'matter-js'
 import { useGameContext } from './GameContext'
 import { motion } from 'framer-motion'
 
-const colour = [
-    [66, 133, 244],
-    [122, 60, 208],
-    [251, 188, 5],
-    [234, 67, 53],
-    [52, 168, 83],
-]
-
-export default function PhysicsGame({
-    width = 800,
-    height = 600,
-}: {
-    width?: number
-    height?: number
-}) {
+export default function PhysicsGame() {
     const sceneRef = useRef<HTMLDivElement>(null)
-    const engineRef = useRef<Matter.Engine | null>(null)
-    const [dimensions, setDimensions] = useState({ width, height })
     const { setGameLoaded } = useGameContext()
+    const [mouse, setMouse] = useState<Matter.Mouse | null>(null)
 
     useEffect(() => {
+        const getCSSVariableValue = (variableName: any) => {
+            return getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
+        }
+
+        const contentColor = getCSSVariableValue('--color-content');
+        const [contentR, contentG, contentB] = contentColor.split(',').map(Number);
+
+        const accentColors: number[][] = [];
+        for (let i = 1; i <= 5; i++) {
+            const accentColor = getCSSVariableValue(`--color-acc${i}`);
+            const [r, g, b] = accentColor.split(',').map(Number);
+            accentColors.push([r, g, b]);
+        }
+
         if (!sceneRef.current) return
 
-        // Create engine
-        const engine = Engine.create({ gravity: { x: 0, y: 1 } })
-        engineRef.current = engine
+        const Engine = Matter.Engine
+        const Render = Matter.Render
+        const Runner = Matter.Runner
+        const World = Matter.World
+        const Bodies = Matter.Bodies
+        const Mouse = Matter.Mouse
+        const MouseConstraint = Matter.MouseConstraint
+        const Constraint = Matter.Constraint
+        const Composites = Matter.Composites
+        const Events = Matter.Events
 
-        // Create renderer
+        const engine = Engine.create()
+        const runner = Runner.create()
+
         const render = Render.create({
             element: sceneRef.current,
             engine: engine,
             options: {
-                width: dimensions.width,
-                height: dimensions.height,
+                width: 2400,
+                height: 900,
                 wireframes: false,
                 background: 'transparent',
             },
         })
 
-        render.canvas.width = dimensions.width
-        render.canvas.height = dimensions.height
-
-        // Create walls
-        const wallOptions = {
+        // Ground parameters
+        const ground = Bodies.rectangle(2000, 520, 600, 15, { 
             isStatic: true,
-            render: {
-                fillStyle: 'rgba(0,0,0,0)',
-                strokeStyle: 'rgba(0,0,0,0)',
-                lineWidth: 0,
-            },
-        }
-        const ground = Bodies.rectangle(
-            dimensions.width / 2,
-            dimensions.height,
-            dimensions.width,
-            20,
-            wallOptions
-        )
-        const leftWall = Bodies.rectangle(
-            0,
-            dimensions.height / 2,
-            20,
-            dimensions.height,
-            wallOptions
-        )
-        const rightWall = Bodies.rectangle(
-            dimensions.width,
-            dimensions.height / 2,
-            20,
-            dimensions.height,
-            wallOptions
-        )
-        const ceiling = Bodies.rectangle(
-            dimensions.width / 2,
-            0,
-            dimensions.width,
-            20,
-            wallOptions
-        )
+            render: { fillStyle: `rgb(${contentR}, ${contentG}, ${contentB})` }
+        })
 
-        Composite.add(engine.world, [ground, leftWall, rightWall, ceiling])
+        // Select a random accent color for the initial ball
+        let randomAccentColor = accentColors[Math.floor(Math.random() * accentColors.length)];
+        let [accentR, accentG, accentB] = randomAccentColor;
 
-        // Add mouse control
+        // Slingshot position and size
+        let ball = Bodies.circle(300, 600, 15, {
+            render: { fillStyle: `rgb(${accentR}, ${accentG}, ${accentB})` }
+        });
+        let sling = Constraint.create({
+            pointA: { x: 300, y: 600 },
+            bodyB: ball,
+            stiffness: 0.05,
+            render: { visible: true, lineWidth: 2, strokeStyle: `rgb(${contentR}, ${contentG}, ${contentB})` }
+        })
+
+        // Create mouse and mouse constraint
         const mouse = Mouse.create(render.canvas)
+        setMouse(mouse)
         const mouseConstraint = MouseConstraint.create(engine, {
             mouse: mouse,
             constraint: {
                 stiffness: 0.2,
-                render: {
-                    visible: false,
-                },
-            },
+                render: { visible: false }
+            }
         })
 
-        Composite.add(engine.world, mouseConstraint)
+        // Ensure the mouse is properly scaled and offset
+        mouse.pixelRatio = window.devicePixelRatio || 1
+        mouse.offset = { x: 0, y: 0 }
 
-        // Run the engine
-        Engine.run(engine)
+        let firing = false
+        Events.on(mouseConstraint, "enddrag", function (e: any) {
+            if (e.body === ball) firing = true
+        })
+
+        Events.on(engine, "afterUpdate", function () {
+            if (firing && Math.abs(ball.position.x - 300) < 20 && Math.abs(ball.position.y - 600) < 20) {
+                // Select a new random accent color for each new ball
+                randomAccentColor = accentColors[Math.floor(Math.random() * accentColors.length)];
+                [accentR, accentG, accentB] = randomAccentColor;
+    
+                ball = Bodies.circle(300, 600, 15, {
+                    render: { fillStyle: `rgb(${accentR}, ${accentG}, ${accentB})` }
+                })
+                World.add(engine.world, ball)
+                sling.bodyB = ball
+                firing = false
+            }
+        })
+
+        // Shape parameters, '8' for octagon
+        const stack = Composites.stack(1800, 1, 15, 15, 0, 0, function (x: any, y: any) {
+            return Bodies.polygon(x, y, 8, 18, {
+                render: { fillStyle: '#34A853' }
+            })
+        })
+
+        World.add(engine.world, [stack, ground, ball, sling, mouseConstraint])
+        
+        // Run the engine and renderer
+        Runner.run(runner, engine)
         Render.run(render)
 
-        const runner = Matter.Runner.create()
-        Matter.Runner.run(runner, engine)
+        // Ensure the mouse is added to the render context
+        render.mouse = mouse
+
+        const updateColors = () => {
+            const newContentColor = getCSSVariableValue('--color-content');
+            const [newR, newG, newB] = newContentColor.split(',').map(Number);
+            ground.render.fillStyle = `rgb(${newR}, ${newG}, ${newB})`;
+        }
+
+        window.addEventListener('resize', updateColors);
 
         // Cleanup function
         return () => {
-            Matter.Runner.stop(runner)
             Render.stop(render)
+            Runner.stop(runner)
             World.clear(engine.world, false)
             Engine.clear(engine)
-            render.canvas.remove()
-            render.canvas = null
-            render.context = null
+            if (render.canvas) {
+                render.canvas.remove()
+            }
+            if (render.context) {
+                (render.context as any) = null
+            }
             render.textures = {}
+            window.removeEventListener('resize', updateColors);
         }
-    }, [dimensions])
+    }, [])
 
     useEffect(() => {
-        const handleResize = () => {
-            if (sceneRef.current) {
-                setDimensions({
-                    width: sceneRef.current.clientWidth,
-                    height: sceneRef.current.clientHeight,
-                })
+        if (!mouse || !sceneRef.current) return
+
+        const updateMousePosition = (clientX: number, clientY: number) => {
+            const bounds = sceneRef.current?.getBoundingClientRect()
+            if (bounds) {
+                mouse.position.x = clientX - bounds.left
+                mouse.position.y = clientY - bounds.top
             }
         }
 
-        window.addEventListener('resize', handleResize)
-        handleResize()
+        const handleMouseMove = (event: MouseEvent) => {
+            updateMousePosition(event.clientX, event.clientY)
+        }
 
-        return () => window.removeEventListener('resize', handleResize)
-    }, [])
+        const handleTouchMove = (event: TouchEvent) => {
+            event.preventDefault()
+            updateMousePosition(event.touches[0].clientX, event.touches[0].clientY)
+        }
 
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        if (!engineRef.current) return
+        sceneRef.current.addEventListener('mousemove', handleMouseMove)
+        sceneRef.current.addEventListener('touchmove', handleTouchMove)
 
-        const rect = sceneRef.current?.getBoundingClientRect()
-        if (!rect) return
-
-        const x = event.clientX - rect.left
-        const y = event.clientY - rect.top
-
-        const randColour = colour[Math.floor(Math.random() * colour.length)]
-
-        const ball = Bodies.circle(x, y, 20 + Math.random() * 10, {
-            restitution: 0.9,
-            render: {
-                fillStyle: `rgb(${randColour[0]}, ${randColour[1]}, ${randColour[2]})`,
-            },
-        })
-
-        Composite.add(engineRef.current.world, ball)
-    }
+        return () => {
+            sceneRef.current?.removeEventListener('mousemove', handleMouseMove)
+            sceneRef.current?.removeEventListener('touchmove', handleTouchMove)
+        }
+    }, [mouse])
 
     return (
         <motion.div
-            ref={sceneRef}
-            onClick={handleClick}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="relative overflow-hidden w-full h-full"
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }}
+            className="relative w-full h-screen overflow-hidden"
         >
+            <div ref={sceneRef} className="absolute inset-0 z-50" style={{ cursor: 'grab' }} />
             <button
                 onClick={() => setGameLoaded(false)}
                 className="absolute top-8 left-8 bg-secondary px-4 py-3 rounded-3xl text-content font-semibold"
             >
                 BACK
             </button>
-            <p className="absolute top-8 left-1/2 text-xl">
-                Click anywhere to add a ball
+            <p className="absolute top-8 left-1/2 transform -translate-x-1/2 text-xl text-center z-10">
+                Shoot the octagons!
             </p>
         </motion.div>
     )

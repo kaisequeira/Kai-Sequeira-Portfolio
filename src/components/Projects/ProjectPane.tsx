@@ -67,9 +67,7 @@ const ProjectPane: React.FC<ProjectPaneProps> = ({
                 style={{ backgroundImage: colour }}
                 onMouseEnter={() => setIsInteracted(true)}
                 onMouseLeave={() => setIsInteracted(false)}
-                onMouseDown={() =>
-                    setIsInteracted((isInteracted) => !isInteracted)
-                }
+                onClick={() => !isLgOrAbove && window.open(link, '_blank', 'noopener,noreferrer')}
             >
                 <div className="h-full w-full flex items-center justify-center absolute">
                     <video

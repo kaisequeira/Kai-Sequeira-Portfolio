@@ -118,7 +118,6 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
             color = 'var(--gradient-acc5)'
             onClick = () => setGameLoaded(true)
             break
-        // TODO: Create animation that transitions to tech stack game
         default:
             throw new Error('Invalid contact type')
     }

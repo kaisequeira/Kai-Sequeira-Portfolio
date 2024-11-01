@@ -1,21 +1,61 @@
-import ScrollDownButton from './ArrowDown'
-import React from 'react'
+'use client'
+
+import React, { useRef, useEffect, useState } from 'react'
 import '@/app/globals.css'
 import Label from '../_Global/Label'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot, faSchool } from '@fortawesome/free-solid-svg-icons'
 import Hyperlink from '../_Global/Hyperlink'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import ContactBox from './ContactBox'
+import { useGameContext } from '../PhysicsGame/GameContext'
+import PhysicsGame from '../PhysicsGame/PhysicsGame'
+
+interface TitleElement {
+    type: string
+    content: string | null
+    x: number
+    y: number
+    width: number
+    height: number
+    style: Partial<CSSStyleDeclaration>
+}
 
 const Title: React.FC = () => {
+    const [titleElements, setTitleElements] = useState<TitleElement[]>([])
+    const titleRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        if (titleRef.current) {
+            const elements = Array.from(titleRef.current.children).map((child): TitleElement => {
+                const rect = child.getBoundingClientRect()
+                return {
+                    type: child.tagName.toLowerCase(),
+                    content: child.textContent,
+                    x: rect.left,
+                    y: rect.top,
+                    width: rect.width,
+                    height: rect.height,
+                    style: {
+                        color: window.getComputedStyle(child).color,
+                        fontSize: window.getComputedStyle(child).fontSize,
+                        fontWeight: window.getComputedStyle(child).fontWeight,
+                        // Add any other styles you want to preserve
+                    },
+                }
+            })
+            setTitleElements(elements)
+        }
+    }, [])
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
-            className="flex-grow flex flex-col justify-center md:items-center items-start md:gap-12 gap-8 pt-6 lg:w-[1000px] xs:w-[360px] w-[330px]"
+            ref={titleRef}
+            initial={{ opacity: 0}}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.1 }}
+            className="flex-grow flex flex-col justify-center md:items-center items-start md:gap-12 gap-8 pb-16 lg:w-[1000px] xs:w-[360px] w-[330px] absolute px-0"
         >
             <h1 className="md:text-center text-left text-wrap">
                 Nice to meet you, I&apos;m Kai.
