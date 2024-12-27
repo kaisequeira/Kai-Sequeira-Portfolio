@@ -3,7 +3,7 @@
 import React from 'react'
 import { useMediaQuery } from 'react-responsive'
 import Hyperlink from '../_Global/Hyperlink'
-import AnimatedIcon from './AnimatedIcon'
+import TransformingIcon from './TransformingIcon'
 
 type BioProps = {
     className?: string
@@ -22,7 +22,7 @@ const Bio: React.FC<BioProps> = ({ className }) => {
     return (
         <div className={className}>
             <h2>
-                About <AnimatedIcon />
+                About <TransformingIcon />
             </h2>
             <div className="flex flex-col gap-4" onClick={handleClick}>
                 <div
@@ -80,7 +80,7 @@ const Bio: React.FC<BioProps> = ({ className }) => {
                         and document my travels.
                     </p>
                 </div>
-                <p className="text-left md:hidden visible md:text-xl sm:text-lg text-base">
+                <p className="text-left lg:hidden visible md:text-xl sm:text-lg text-base">
                     {isExpanded ? 'See less...' : 'See more...'}
                 </p>
             </div>

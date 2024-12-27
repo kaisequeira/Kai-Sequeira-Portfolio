@@ -1,6 +1,6 @@
 'use client'
 
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMediaQuery } from 'react-responsive'
@@ -20,7 +20,7 @@ const icons = [
     faGamepad,
 ]
 
-const AnimatedIcon: React.FC = () => {
+const TransformingIcon: React.FC = () => {
     const [iconIndex, setIconIndex] = useState(0)
     const [isHovered, setIsHovered] = useState(false)
 
@@ -49,7 +49,7 @@ const AnimatedIcon: React.FC = () => {
                 ease: 'easeInOut',
                 times: [0, 0.5, 0.575, 0.65, 0.725, 0.8, 0.875, 1],
                 repeat: Infinity,
-                repeatDelay: 4,
+                repeatDelay: 3,
             },
         })
     }, [isHovered, isLgOrAbove, controls, isSpinning])
@@ -87,4 +87,4 @@ const AnimatedIcon: React.FC = () => {
     )
 }
 
-export default AnimatedIcon
+export default TransformingIcon

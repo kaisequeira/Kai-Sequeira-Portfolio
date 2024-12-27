@@ -1,3 +1,5 @@
+'use client'
+
 // GameContext.tsx
 import React, { createContext, useContext, useState } from 'react'
 

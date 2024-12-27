@@ -10,12 +10,15 @@ import {
     faAddressCard,
     faSquareArrowUpRight,
     faPaste,
-    faQuestion,
     faPlay,
     faCircleCheck,
+    faStop,
+    faX,
+    faGamepad,
+    faCircleXmark,
 } from '@fortawesome/free-solid-svg-icons'
-import { useRouter } from 'next/navigation'
 import { useGameContext } from '../PhysicsGame/GameContext'
+import { useMediaQuery } from 'react-responsive'
 
 type ContactType = 'Github' | 'LinkedIn' | 'Resume' | 'Email' | 'Play'
 
@@ -29,17 +32,18 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
     const EMAIL = 'kai.sequeira2003@gmail.com'
     let icon: JSX.Element,
         color: string,
+        title: string | undefined = undefined,
         successTitle: string | undefined = undefined,
         onClick: (event: MouseEvent<HTMLButtonElement>) => void,
         actionIcon: any
-    const router = useRouter()
 
     const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
         setClicked(true)
         if (onClick) onClick(event)
     }
 
-    const { setGameLoaded } = useGameContext()
+    const { setGameLoaded, gameLoaded } = useGameContext()
+    const isLgOrAbove = useMediaQuery({ query: '(min-width: 1024px)' })
 
     switch (type) {
         case 'Github':
@@ -55,7 +59,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
                 setTimeout(
                     () =>
                         window.open('https://github.com/kaisequeira', '_blank'),
-                    300
+                    200
                 )
             break
         case 'LinkedIn':
@@ -74,7 +78,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
                             'https://www.linkedin.com/in/kai-sequeira-3b49602ba/',
                             '_blank'
                         ),
-                    300
+                    200
                 )
             break
         case 'Resume':
@@ -89,7 +93,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
             onClick = () =>
                 setTimeout(
                     () => window.open('/KaiSequeiraResume.pdf', '_blank'),
-                    300
+                    200
                 )
             break
         case 'Email':
@@ -110,13 +114,14 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
         case 'Play':
             icon = (
                 <FontAwesomeIcon
-                    className="size-5/12 text-offwhite"
-                    icon={faQuestion}
+                    className="size-4/12 pl-0.5 text-offwhite"
+                    icon={gameLoaded ? faStop : faPlay}
                 />
             )
-            actionIcon = faPlay
+            actionIcon = gameLoaded ? faCircleXmark : faGamepad
+            title = gameLoaded ? 'Stop' : 'Play'
             color = 'var(--gradient-acc5)'
-            onClick = () => setGameLoaded(true)
+            onClick = () => setGameLoaded(gameLoaded ? false : true)
             break
         default:
             throw new Error('Invalid contact type')
@@ -131,6 +136,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
                 style={{ backgroundImage: color }}
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
+                whileTap={{ scale: isLgOrAbove ? 1 : 0.75 }}
                 whileHover={{ y: -10 }}
                 onClick={handleClick}
             >
@@ -142,7 +148,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
             </motion.button>
             <motion.div
                 style={{ backgroundImage: color }}
-                className="absolute top-full mt-6 rounded-3xl h-11 w-36 hidden md:tall:flex flex-row justify-center items-center gap-x-2"
+                className="absolute top-full mt-6 rounded-3xl h-11 w-36 hidden lg:tall:flex flex-row justify-center items-center gap-x-2"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
                 exit={{ opacity: 0, y: 10 }}
@@ -152,11 +158,17 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
                 <p className="text-offwhite font-semibold text-center">
                     {clicked && successTitle !== undefined
                         ? successTitle
-                        : type.toString()}
+                        : title !== undefined
+                          ? title
+                          : type.toString()}
                 </p>
                 <FontAwesomeIcon
-                    className="size-6 text-offwhite"
-                    icon={clicked ? faCircleCheck : actionIcon}
+                    className="size-5 text-offwhite"
+                    icon={
+                        clicked && title === undefined
+                            ? faCircleCheck
+                            : actionIcon
+                    }
                 />
             </motion.div>
         </div>

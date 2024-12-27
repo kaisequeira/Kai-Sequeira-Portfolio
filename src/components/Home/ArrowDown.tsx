@@ -7,7 +7,6 @@ import { motion } from 'framer-motion'
 import React from 'react'
 
 export default function ScrollDownButton() {
-    const [hovered, setHovered] = React.useState(false)
     const { lenis } = useLenis()
 
     const scrollToProjects = () => {
@@ -21,14 +20,12 @@ export default function ScrollDownButton() {
 
     return (
         <motion.button
-            className="md:size-14 size-14 pb-10 z-20 absolute bottom-12"
+            className="size-fit pb-0 z-50 absolute bottom-1/20"
             onTap={scrollToProjects}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
         >
             <motion.div>
                 <FontAwesomeIcon
-                    className="size-5/12 pt-1 text-content"
+                    className="size-6 pt-1 text-content"
                     icon={faChevronDown}
                 />
             </motion.div>

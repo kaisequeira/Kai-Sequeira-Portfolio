@@ -32,7 +32,7 @@ const Hyperlink: React.FC<HyperlinkProps> = ({
         <Link
             href={href}
             ref={ref}
-            className="hyperlink relative inline-block"
+            className="hyperlink relative inline-block z-50"
             target={newTab ? '_blank' : '_self'}
             rel={newTab ? 'noopener noreferrer' : ''}
         >

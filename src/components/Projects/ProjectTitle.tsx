@@ -45,18 +45,7 @@ export default function ProjectTitle() {
             style={isLoaded ? { opacity } : {}}
             className="mb-6 mt-8 will-change-transform"
         >
-            <RoughNotation
-                type="underline"
-                show={show}
-                color={`rgb(var(--color-content))`}
-                strokeWidth={4}
-                padding={14}
-                iterations={2}
-                animationDuration={5000}
-                animate={true}
-            >
-                Projects {''}
-            </RoughNotation>
+            Projects {''}
             <FontAwesomeIcon
                 className="text-content font-semibold w-14 md:w-20 text-3xl xs:text-4xl md:text-5xl"
                 icon={faPencil}

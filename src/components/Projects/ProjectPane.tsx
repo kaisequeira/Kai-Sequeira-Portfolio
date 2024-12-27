@@ -1,13 +1,13 @@
 'use client'
 
-import React, { RefObject, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Label from '../_Global/Label'
-import { useScroll, useTransform, motion, spring, circOut } from 'framer-motion'
+import { useScroll, useTransform, motion, circOut } from 'framer-motion'
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import Link from 'next/link'
 import { useMediaQuery } from 'react-responsive'
 import { cn } from '@/lib/utils'
+import BouncingIcon from './BouncingIcon'
 
 interface ProjectPaneProps {
     icon: IconDefinition
@@ -67,7 +67,10 @@ const ProjectPane: React.FC<ProjectPaneProps> = ({
                 style={{ backgroundImage: colour }}
                 onMouseEnter={() => setIsInteracted(true)}
                 onMouseLeave={() => setIsInteracted(false)}
-                onClick={() => !isLgOrAbove && window.open(link, '_blank', 'noopener,noreferrer')}
+                onClick={() =>
+                    !isLgOrAbove &&
+                    window.open(link, '_blank', 'noopener,noreferrer')
+                }
             >
                 <div className="h-full w-full flex items-center justify-center absolute">
                     <video
@@ -89,17 +92,7 @@ const ProjectPane: React.FC<ProjectPaneProps> = ({
                     transition={{ type: 'tween' }}
                 >
                     <div className="h-full w-full flex flex-col relative">
-                        <a
-                            href={link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="absolute top-6 right-6"
-                        >
-                            <FontAwesomeIcon
-                                className="lg:text-offwhite text-offblack font-semibold text-4xl"
-                                icon={icon}
-                            />
-                        </a>
+                        <BouncingIcon icon={icon} link={link} />
                         <div className="flex-1 flex items-center justify-center px-1/11">
                             <div className="text-center font-semibold text-offwhite lg:block hidden">
                                 {description}

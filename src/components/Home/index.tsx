@@ -3,30 +3,79 @@
 import ScrollDownButton from './ArrowDown'
 import React from 'react'
 import '@/app/globals.css'
-import Title from './Title'
-import { GameProvider, useGameContext } from '../PhysicsGame/GameContext'
-import { AnimatePresence } from 'framer-motion'
 import { cn } from '@/lib/utils'
-import PhysicsGame from '../PhysicsGame/PhysicsGame'
+import { motion } from 'framer-motion'
+import Hyperlink from '../_Global/Hyperlink'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Label from '../_Global/Label'
+import { faLocationDot, faSchool } from '@fortawesome/free-solid-svg-icons'
+import ContactBox from './ContactBox'
 
 const Home: React.FC = () => {
     return (
-        <GameProvider>
-            <HomeContent />
-        </GameProvider>
-    )
-}
-
-const HomeContent: React.FC = () => {
-    const { gameLoaded } = useGameContext()
-
-    return (
-        <div className={cn("bg-bgr w-screen h-screen flex flex-col items-center justify-center relative")}>
-            <AnimatePresence>
-                {gameLoaded && <PhysicsGame key="game" />}
-                <Title key="title" />
-                <ScrollDownButton />
-            </AnimatePresence>
+        <div
+            className={cn(
+                'w-screen h-screen flex flex-col items-center justify-center relative'
+            )}
+        >
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.1 }}
+                className="flex-grow flex flex-col justify-center lg:items-center items-start lg:gap-12 gap-8 pb-16 lg:w-[1000px] xs:w-[360px] w-[330px] absolute px-0"
+            >
+                <h1 className="lg:text-center text-left text-wrap">
+                    Nice to meet you, I&apos;m Kai.
+                </h1>
+                <div className="flex flex-col lg:items-center items-start gap-4">
+                    <h5 className="lg:text-center text-left text-wrap lg:px-6 lg:py-3 px-4 py-2 rounded-5xl bg-secondary w-fit font-semibold">
+                        SOFTWARE ENGINEERING & FINANCE
+                    </h5>
+                    <h4 className="lg:text-center text-left text-wrap p-0">
+                        Currently the Telemetry Project Lead at{' '}
+                        <Hyperlink
+                            href="https://www.redbackracing.com/"
+                            colour="--color-acc4"
+                            newTab
+                        >
+                            UNSW Redback Racing
+                        </Hyperlink>
+                    </h4>
+                    <div className="flex flex-row lg:justify-center justify-start gap-4 flex-wrap">
+                        <Label title="Institution" note="UNSW" unresponsive>
+                            <FontAwesomeIcon
+                                className="text-content font-semibold"
+                                icon={faSchool}
+                            />
+                        </Label>
+                        <Label title="Location" note="Sydney" unresponsive>
+                            <FontAwesomeIcon
+                                className="text-content font-semibold"
+                                icon={faLocationDot}
+                            />
+                        </Label>
+                    </div>
+                </div>
+                <div className="lg:flex grid grid-cols-4 relative lg:gap-8 gap-4">
+                    <div className="lg:transform -rotate-6 translate-y-4 transform-none z-50">
+                        <ContactBox type="Github" />
+                    </div>
+                    <div className="lg:transform -rotate-3 translate-y-1 transform-none z-50">
+                        <ContactBox type="LinkedIn" />
+                    </div>
+                    <div className="transform z-50 hidden lg:block">
+                        <ContactBox type="Play" />
+                    </div>
+                    <div className="lg:transform rotate-3 translate-y-1 transform-none z-50">
+                        <ContactBox type="Resume" />
+                    </div>
+                    <div className="lg:transform rotate-6 translate-y-4 transform-none z-50">
+                        <ContactBox type="Email" />
+                    </div>
+                </div>
+            </motion.div>
+            <ScrollDownButton />
         </div>
     )
 }
