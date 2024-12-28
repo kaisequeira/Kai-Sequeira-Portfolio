@@ -4,6 +4,7 @@ import React from 'react'
 import { useMediaQuery } from 'react-responsive'
 import Hyperlink from '../_Global/Hyperlink'
 import TransformingIcon from './TransformingIcon'
+import { cn } from '@/lib/utils'
 
 type BioProps = {
     className?: string
@@ -24,12 +25,18 @@ const Bio: React.FC<BioProps> = ({ className }) => {
             <h2>
                 About <TransformingIcon />
             </h2>
-            <div className="flex flex-col gap-4" onClick={handleClick}>
+            <div
+                className={cn(
+                    'flex flex-col gap-4',
+                    !isLgOrAbove ? 'pointer-events-auto' : 'pointer-events-none'
+                )}
+                onClick={handleClick}
+            >
                 <div
                     className={`space-y-8 ${isExpanded ? 'line-clamp-none' : 'line-clamp-8'} lg:line-clamp-none`}
                 >
                     <p className="text-content font-normal md:text-xl sm:text-lg text-base">
-                        I am currently in my third year at{' '}
+                        I am currently in my fourth year at{' '}
                         <Hyperlink
                             href="https://www.unsw.edu.au/"
                             colour="--color-acc1"
@@ -56,7 +63,7 @@ const Bio: React.FC<BioProps> = ({ className }) => {
                         , with a major in Finance.
                     </p>
                     <p className="text-content font-normal md:text-xl sm:text-lg text-base">
-                        As a Software Engineer with{' '}
+                        Previously a Software Engineer at{' '}
                         <Hyperlink
                             href="https://www.redbackracing.com/"
                             colour="--color-acc4"
@@ -64,10 +71,10 @@ const Bio: React.FC<BioProps> = ({ className }) => {
                         >
                             UNSW Redback Racing
                         </Hyperlink>
-                        , my role encompasses full-stack development where I
-                        deploy microservices, develop cloud solutions to help
-                        race engineers manage data and design frontend
-                        interfaces to abstract this logic.
+                        , my current role as the Telemetry Project Lead
+                        encompasses managing a team of +7 software engineers
+                        across data analytics, cloud ops, streaming, database
+                        management, simlations, testing and live telemetry.
                     </p>
                     <p className="text-content font-extralight md:text-xl sm:text-lg text-base">
                         Beyond the keyboard,

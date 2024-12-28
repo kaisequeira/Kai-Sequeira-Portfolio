@@ -108,7 +108,8 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
             color = 'var(--gradient-acc4)'
             onClick = (event: MouseEvent<HTMLButtonElement>) => {
                 event.preventDefault()
-                navigator.clipboard.writeText(EMAIL)
+                if (isLgOrAbove) navigator.clipboard.writeText(EMAIL)
+                else window.location.href = `mailto:${EMAIL}`
             }
             break
         case 'Play':
@@ -131,7 +132,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
         <div className="relative flex flex-col items-center">
             <motion.button
                 className={
-                    'md:rounded-3xl rounded-2xl lg:size-24 sm:size-20 size-16 flex items-center justify-center'
+                    'md:rounded-3xl rounded-2xl lg:size-24 sm:size-20 size-16 flex items-center justify-center pointer-events-auto'
                 }
                 style={{ backgroundImage: color }}
                 onMouseEnter={() => setHovered(true)}
@@ -148,7 +149,7 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
             </motion.button>
             <motion.div
                 style={{ backgroundImage: color }}
-                className="absolute top-full mt-6 rounded-3xl h-11 w-36 hidden lg:tall:flex flex-row justify-center items-center gap-x-2"
+                className="absolute top-full mt-6 rounded-3xl h-11 w-36 hidden lg:tall:flex flex-row justify-center items-center gap-x-2 pointer-events-none"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
                 exit={{ opacity: 0, y: 10 }}

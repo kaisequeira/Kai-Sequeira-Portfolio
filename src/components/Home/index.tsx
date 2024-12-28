@@ -15,7 +15,7 @@ const Home: React.FC = () => {
     return (
         <div
             className={cn(
-                'w-screen h-screen flex flex-col items-center justify-center relative'
+                'w-screen h-screen flex flex-col items-center justify-center relative pointer-events-none'
             )}
         >
             <motion.div
@@ -23,7 +23,7 @@ const Home: React.FC = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.1 }}
-                className="flex-grow flex flex-col justify-center lg:items-center items-start lg:gap-12 gap-8 pb-16 lg:w-[1000px] xs:w-[360px] w-[330px] absolute px-0"
+                className="flex-grow flex flex-col justify-center lg:items-center items-start lg:gap-12 gap-8 pb-16 lg:w-[1000px] xs:w-[360px] w-[330px] px-0"
             >
                 <h1 className="lg:text-center text-left text-wrap">
                     Nice to meet you, I&apos;m Kai.
@@ -58,19 +58,19 @@ const Home: React.FC = () => {
                     </div>
                 </div>
                 <div className="lg:flex grid grid-cols-4 relative lg:gap-8 gap-4">
-                    <div className="lg:transform -rotate-6 translate-y-4 transform-none z-50">
+                    <div className="lg:transform -rotate-6 translate-y-4 transform-none">
                         <ContactBox type="Github" />
                     </div>
-                    <div className="lg:transform -rotate-3 translate-y-1 transform-none z-50">
+                    <div className="lg:transform -rotate-3 translate-y-1 transform-none">
                         <ContactBox type="LinkedIn" />
                     </div>
-                    <div className="transform z-50 hidden lg:block">
+                    <div className="transform hidden lg:block">
                         <ContactBox type="Play" />
                     </div>
-                    <div className="lg:transform rotate-3 translate-y-1 transform-none z-50">
+                    <div className="lg:transform rotate-3 translate-y-1 transform-none">
                         <ContactBox type="Resume" />
                     </div>
-                    <div className="lg:transform rotate-6 translate-y-4 transform-none z-50">
+                    <div className="lg:transform rotate-6 translate-y-4 transform-none">
                         <ContactBox type="Email" />
                     </div>
                 </div>

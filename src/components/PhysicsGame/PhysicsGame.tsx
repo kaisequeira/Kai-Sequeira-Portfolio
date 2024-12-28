@@ -1,12 +1,22 @@
-'use client'
+type ExtendedMouse = Matter.Mouse & {
+    body?: Matter.Body
+    constraint?: Matter.Constraint
+}
 
-import React, { useEffect, useRef, useState } from 'react'
+;('use client')
+
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import Matter from 'matter-js'
 import { motion } from 'framer-motion'
 
 export default function PhysicsGame() {
     const sceneRef = useRef<HTMLDivElement>(null)
-    const [mouse, setMouse] = useState<Matter.Mouse | null>(null)
+    const engineRef = useRef<Matter.Engine | null>(null)
+    const [mouse, setMouse] = useState<ExtendedMouse | null>(null)
+    const [isMousePressed, setIsMousePressed] = useState(false)
+    const [mouseConstraint, setMouseConstraint] =
+        useState<Matter.MouseConstraint | null>(null)
+    const [constraintApplied, setConstraintApplied] = useState(false)
 
     useEffect(() => {
         const getCSSVariableValue = (variableName: any) => {
@@ -41,6 +51,9 @@ export default function PhysicsGame() {
         const Events = Matter.Events
 
         const engine = Engine.create()
+        engineRef.current = engine
+        engine.gravity.y = 0
+        //   engine.gravity.x = 1
         const runner = Runner.create()
 
         const width = sceneRef.current.offsetWidth
@@ -77,13 +90,14 @@ export default function PhysicsGame() {
         let [accentR, accentG, accentB] = randomAccentColor
 
         // Slingshot position and size
-        let ball = Bodies.circle(width * (1 / 8), height * (2 / 3), 30, {
+        let ball = Bodies.circle(width * (4 / 8), height * (4 / 5), 30, {
             render: { fillStyle: `rgb(${accentR}, ${accentG}, ${accentB})` },
         })
         let sling = Constraint.create({
-            pointA: { x: width * (1 / 8), y: height * (2 / 3) },
+            pointA: { x: width * (4 / 8), y: height * (4 / 5) },
             bodyB: ball,
-            stiffness: 0.05,
+            stiffness: 0.1,
+            damping: 0.1,
             render: {
                 type: 'line',
                 visible: true,
@@ -93,7 +107,7 @@ export default function PhysicsGame() {
         })
 
         // Create mouse and mouse constraint
-        const mouse = Mouse.create(render.canvas)
+        const mouse = Mouse.create(render.canvas) as ExtendedMouse
         setMouse(mouse)
         const mouseConstraint = MouseConstraint.create(engine, {
             mouse: mouse,
@@ -101,23 +115,48 @@ export default function PhysicsGame() {
                 stiffness: 0.2,
                 render: { visible: false },
             },
-        })
+        }) as Matter.MouseConstraint
+        setMouseConstraint(mouseConstraint)
 
         // Ensure the mouse is properly scaled and offset
         mouse.pixelRatio = window.devicePixelRatio || 1
         mouse.offset = { x: 0, y: 0 }
 
         let firing = false
+        let passedThroughCenter = false
+        let timeoutId: NodeJS.Timeout | null = null
+
         Events.on(mouseConstraint, 'enddrag', function (e: any) {
-            if (e.body === ball) firing = true
+            if (e.body === ball) {
+                firing = true
+                passedThroughCenter = false
+
+                if (timeoutId) clearTimeout(timeoutId)
+                timeoutId = setTimeout(() => {
+                    if (!passedThroughCenter) {
+                        console.log(
+                            'Fallback: Ball did not pass through the center within 0.3 seconds'
+                        )
+                        passedThroughCenter = true
+                    }
+                }, 300)
+            }
         })
 
         Events.on(engine, 'afterUpdate', function () {
-            if (
-                firing &&
-                Math.abs(ball.position.x - width * (1 / 8)) < 35 &&
-                Math.abs(ball.position.y - height * (2 / 3)) < 35
-            ) {
+            const dx = ball.position.x - width * (4 / 8)
+            const dy = ball.position.y - height * (4 / 5)
+            const distance = Math.sqrt(dx * dx + dy * dy)
+
+            // Check if the ball has passed through the center of the slingshot
+            if (firing && !passedThroughCenter && distance < 35) {
+                passedThroughCenter = true
+                sling.bodyB = null
+                sling.render.visible = false
+            }
+
+            // Check if the ball is far enough away to spawn a new one
+            if (firing && passedThroughCenter && distance > 50) {
                 // Select a new random accent color for each new ball
                 randomAccentColor =
                     accentColors[
@@ -125,25 +164,29 @@ export default function PhysicsGame() {
                     ]
                 ;[accentR, accentG, accentB] = randomAccentColor
 
-                ball = Bodies.circle(width * (1 / 8), height * (2 / 3), 30, {
+                ball = Bodies.circle(width * (4 / 8), height * (4 / 5), 30, {
                     render: {
                         fillStyle: `rgb(${accentR}, ${accentG}, ${accentB})`,
                     },
                 })
                 World.add(engine.world, ball)
                 sling.bodyB = ball
+                sling.render.visible = true
                 firing = false
+
+                // Clear the timeout if the ball has passed through the center
+                if (timeoutId) clearTimeout(timeoutId)
             }
         })
 
         // Shape parameters, '8' for octagon
         const stack = Composites.stack(
-            width * (7 / 8) - 49.5,
+            width * (6 / 8) - 49.5,
             height * (2 / 3) - 350,
-            3,
-            10,
-            0,
-            0,
+            5,
+            5,
+            4,
+            4,
             function (x: any, y: any) {
                 randomAccentColor =
                     accentColors[
@@ -151,7 +194,7 @@ export default function PhysicsGame() {
                     ]
                 ;[accentR, accentG, accentB] = randomAccentColor
 
-                return Bodies.polygon(x, y, 8, 18, {
+                return Bodies.polygon(x, y, 8, 30, {
                     render: {
                         fillStyle: `rgb(${accentR}, ${accentG}, ${accentB})`,
                     },
@@ -159,7 +202,8 @@ export default function PhysicsGame() {
             }
         )
 
-        const MatterBodies: any = [stack, ground, ball, sling, mouseConstraint]
+        const MatterBodies: any = [stack, ball, sling, mouseConstraint]
+        setConstraintApplied(true)
         World.add(engine.world, MatterBodies)
 
         // Run the engine and renderer
@@ -191,8 +235,30 @@ export default function PhysicsGame() {
         }
     }, [])
 
+    const releaseObjects = useCallback(() => {
+        if (mouseConstraint?.body && engineRef.current && constraintApplied) {
+            Matter.Composite.remove(
+                engineRef.current.world,
+                mouseConstraint.constraint
+            )
+            setConstraintApplied(false)
+        }
+    }, [mouseConstraint, constraintApplied])
+
+    const applyConstraint = useCallback(() => {
+        if (mouseConstraint && engineRef.current && !constraintApplied) {
+            mouseConstraint.constraint.bodyB = null
+            mouseConstraint.mouse.button = -1
+            Matter.Composite.add(
+                engineRef.current.world,
+                mouseConstraint.constraint
+            )
+            setConstraintApplied(true)
+        }
+    }, [mouseConstraint, constraintApplied])
+
     useEffect(() => {
-        if (!mouse || !sceneRef.current) return
+        if (!mouse || !sceneRef.current || !engineRef.current) return
 
         const updateMousePosition = (clientX: number, clientY: number) => {
             const bounds = sceneRef.current?.getBoundingClientRect()
@@ -214,15 +280,40 @@ export default function PhysicsGame() {
             )
         }
 
+        const handleMouseDown = () => setIsMousePressed(true)
+        const handleMouseUp = () => setIsMousePressed(false)
+
+        const handleMouseOut = (event: MouseEvent) => {
+            if (!sceneRef.current?.contains(event.relatedTarget as Node)) {
+                setIsMousePressed(false)
+                releaseObjects()
+            }
+        }
+
+        const handleMouseEnter = () => {
+            applyConstraint()
+        }
+
         sceneRef.current.addEventListener('mousemove', handleMouseMove)
         sceneRef.current.addEventListener('touchmove', handleTouchMove)
+        sceneRef.current.addEventListener('mousedown', handleMouseDown)
+        sceneRef.current.addEventListener('mouseup', handleMouseUp)
+        sceneRef.current.addEventListener('mouseout', handleMouseOut)
+        sceneRef.current.addEventListener('mouseenter', handleMouseEnter)
 
         return () => {
             sceneRef.current?.removeEventListener('mousemove', handleMouseMove)
-            //eslint-disable-next-line react-hooks/exhaustive-deps
             sceneRef.current?.removeEventListener('touchmove', handleTouchMove)
+            sceneRef.current?.removeEventListener('mousedown', handleMouseDown)
+            sceneRef.current?.removeEventListener('mouseup', handleMouseUp)
+            sceneRef.current?.removeEventListener('mouseout', handleMouseOut)
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            sceneRef.current?.removeEventListener(
+                'mouseenter',
+                handleMouseEnter
+            )
         }
-    }, [mouse])
+    }, [mouse, engineRef, releaseObjects, applyConstraint])
 
     return (
         <motion.div
@@ -235,7 +326,7 @@ export default function PhysicsGame() {
             <div
                 ref={sceneRef}
                 className="inset-0 z-10 w-full h-full"
-                style={{ cursor: 'default' }}
+                style={{ cursor: isMousePressed ? 'grabbing' : 'grab' }}
             />
         </motion.div>
     )

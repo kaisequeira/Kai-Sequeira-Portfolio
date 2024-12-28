@@ -49,7 +49,7 @@ const TransformingIcon: React.FC = () => {
                 ease: 'easeInOut',
                 times: [0, 0.5, 0.575, 0.65, 0.725, 0.8, 0.875, 1],
                 repeat: Infinity,
-                repeatDelay: 3,
+                repeatDelay: 2.2,
             },
         })
     }, [isHovered, isLgOrAbove, controls, isSpinning])
@@ -71,7 +71,7 @@ const TransformingIcon: React.FC = () => {
 
     return (
         <motion.button
-            className="w-14 md:w-20 text-3xl xs:text-4xl md:text-5xl rounded-full inline-block origin-center text-center"
+            className="w-14 md:w-20 text-3xl xs:text-4xl md:text-5xl rounded-full inline-block origin-center text-center pointer-events-auto"
             onHoverStart={() => setIsHovered(true)}
             onHoverEnd={() => setIsHovered(false)}
             onAnimationComplete={() => {

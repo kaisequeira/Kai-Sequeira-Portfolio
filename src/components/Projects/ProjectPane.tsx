@@ -7,7 +7,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMediaQuery } from 'react-responsive'
 import { cn } from '@/lib/utils'
-import BouncingIcon from './BouncingIcon'
+import RotatingIcon from './RotatingIcon'
 
 interface ProjectPaneProps {
     icon: IconDefinition
@@ -21,7 +21,7 @@ interface ProjectPaneProps {
 }
 
 const variants = {
-    visible: { x: '0%', opacity: 1 },
+    visible: { x: '0%', opacity: 0.99 },
     hidden: { x: '0%', opacity: 0 },
 }
 
@@ -62,7 +62,7 @@ const ProjectPane: React.FC<ProjectPaneProps> = ({
         >
             <div
                 className={
-                    'h-full w-full rounded-3xl flex flex-row overflow-hidden relative'
+                    'h-full w-full rounded-3xl flex flex-row overflow-hidden relative pointer-events-auto'
                 }
                 style={{ backgroundImage: colour }}
                 onMouseEnter={() => setIsInteracted(true)}
@@ -92,7 +92,7 @@ const ProjectPane: React.FC<ProjectPaneProps> = ({
                     transition={{ type: 'tween' }}
                 >
                     <div className="h-full w-full flex flex-col relative">
-                        <BouncingIcon icon={icon} link={link} />
+                        <RotatingIcon icon={icon} link={link} />
                         <div className="flex-1 flex items-center justify-center px-1/11">
                             <div className="text-center font-semibold text-offwhite lg:block hidden">
                                 {description}

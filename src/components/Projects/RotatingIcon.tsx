@@ -6,18 +6,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { useMediaQuery } from 'react-responsive'
 
-type BouncingIconProps = {
+type RotatingIconProps = {
     icon: IconDefinition
     link: string
 }
 
-const BouncingIcon: React.FC<BouncingIconProps> = ({ icon, link }) => {
+const RotatingIcon: React.FC<RotatingIconProps> = ({ icon, link }) => {
     const isLgOrAbove = useMediaQuery({ query: '(min-width: 1024px)' })
     const controls = useAnimation()
 
     useEffect(() => {
         if (isLgOrAbove)
-            // controls.start({ y: [0, 0, -8, -10, -10, 0], transition: { duration: 1, times: [0, 0.5, 0.6, 0.65, 0.9, 1], repeatDelay: 2, repeat: Infinity} })
             controls.start({
                 rotate: [0, 0, -10, 10, -10, 10, -10, 0],
                 transition: {
@@ -25,12 +24,12 @@ const BouncingIcon: React.FC<BouncingIconProps> = ({ icon, link }) => {
                     ease: 'easeInOut',
                     times: [0, 0.5, 0.575, 0.65, 0.725, 0.8, 0.875, 1],
                     repeat: Infinity,
-                    repeatDelay: 3,
+                    repeatDelay: 1.8,
                 },
             })
         else {
             controls.stop()
-            controls.set({ y: 0 })
+            controls.set({ rotate: 0 })
         }
     }, [controls, isLgOrAbove])
 
@@ -52,4 +51,4 @@ const BouncingIcon: React.FC<BouncingIconProps> = ({ icon, link }) => {
     )
 }
 
-export default BouncingIcon
+export default RotatingIcon

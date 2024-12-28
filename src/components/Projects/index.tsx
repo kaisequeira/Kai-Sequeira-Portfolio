@@ -8,7 +8,7 @@ import Hyperlink from '../_Global/Hyperlink'
 
 const Projects: React.FC = () => {
     return (
-        <div className="flex flex-col w-screen min-h-fit justify-center items-center bg-bgr gap-8 pt-1/20 pb-1/14">
+        <div className="flex flex-col w-screen min-h-fit justify-center items-center bg-bgr gap-8 pt-1/20 pb-1/14 pointer-events-none">
             <div className="flex flex-col gap-9 2xl:w-[1350px] lg:w-[800px] xs:w-[360px] w-[330px]">
                 <ProjectTitle />
                 <div className="flex 2xl:flex-row 2xl:gap-10 gap-8 flex-col">
@@ -106,7 +106,7 @@ const Projects: React.FC = () => {
                         icon={faGithub}
                     />
                 </div>
-                <div className="flex 2xl:flex-row 2xl:gap-10 gap-8 flex-col relative">
+                <div className="flex 2xl:flex-row 2xl:gap-10 gap-8 flex-col">
                     <ProjectPane
                         colour="var(--gradient-acc2)"
                         size="2xl:w-3/5"

@@ -24,12 +24,12 @@ export default function Content() {
 
     return (
         <div className="flex flex-col relative">
-            <Home />
-            <AboutMe />
-            <Projects />
             <AnimatePresence>
                 {gameLoaded && <PhysicsGame key="game" />}
             </AnimatePresence>
+            <Home />
+            <AboutMe />
+            <Projects />
         </div>
     )
 }
