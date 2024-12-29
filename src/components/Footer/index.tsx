@@ -6,10 +6,10 @@ import ClientFooter from './ClientFooter'
 export default function Footer() {
     return (
         <div
-            className="relative lg:h-[35vh] sm:h-[40vh] h-[50vh]"
+            className="relative medium:lg:h-[40vh] medium:sm:h-[45vh] medium:h-[50vh] h-[80vh]"
             style={{ clipPath: 'polygon(0% 0, 100% 0%, 100% 100%, 0 100%)' }}
         >
-            <div className="fixed bottom-0 lg:h-[35vh] sm:h-[40vh] h-[50vh] w-full bg-content flex justify-center items-center">
+            <div className="fixed bottom-0 medium:lg:h-[40vh] medium:sm:h-[45vh] medium:h-[50vh] h-[80vh] w-full bg-content flex justify-center items-center">
                 <div className="flex-row flex items-center 2xl:w-[1350px] lg:w-[800px] xs:w-[360px] w-[330px] h-full">
                     <div className="flex flex-col justify-start gap-8 w-3/5">
                         <p className="text-bgr text-left">

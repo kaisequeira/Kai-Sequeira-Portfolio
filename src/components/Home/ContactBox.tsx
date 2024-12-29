@@ -19,6 +19,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { useGameContext } from '../PhysicsGame/GameContext'
 import { useMediaQuery } from 'react-responsive'
+import { RoughNotation } from 'react-rough-notation'
 
 type ContactType = 'Github' | 'LinkedIn' | 'Resume' | 'Email' | 'Play'
 
@@ -130,9 +131,19 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
 
     return (
         <div className="relative flex flex-col items-center">
+            <RoughNotation
+                type="underline"
+                show={type === 'Play' && !hovered && !gameLoaded}
+                color={`rgb(var(--color-offwhite))`}
+                strokeWidth={2}
+                padding={15}
+                iterations={2}
+                animationDuration={1000}
+                animate={true}
+            >
             <motion.button
                 className={
-                    'md:rounded-3xl rounded-2xl lg:size-24 sm:size-20 size-16 flex items-center justify-center pointer-events-auto'
+                    'small:lg:rounded-3xl rounded-2xl small:lg:size-24 small:sm:size-20 size-16 flex items-center justify-center pointer-events-auto'
                 }
                 style={{ backgroundImage: color }}
                 onMouseEnter={() => setHovered(true)}
@@ -147,9 +158,10 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
                     {icon}
                 </span>
             </motion.button>
+            </RoughNotation>
             <motion.div
                 style={{ backgroundImage: color }}
-                className="absolute top-full mt-6 rounded-3xl h-11 w-36 hidden lg:tall:flex flex-row justify-center items-center gap-x-2 pointer-events-none"
+                className="absolute top-full mt-6 rounded-3xl h-11 w-36 hidden lg:medium:flex flex-row justify-center items-center gap-x-2 pointer-events-none"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : 10 }}
                 exit={{ opacity: 0, y: 10 }}

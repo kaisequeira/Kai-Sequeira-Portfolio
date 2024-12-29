@@ -62,7 +62,7 @@ const ProjectPane: React.FC<ProjectPaneProps> = ({
         >
             <div
                 className={
-                    'h-full w-full rounded-3xl flex flex-row overflow-hidden relative pointer-events-auto'
+                    'h-full w-full rounded-3xl flex flex-row overflow-hidden relative pointer-events-auto shadow-thick'
                 }
                 style={{ backgroundImage: colour }}
                 onMouseEnter={() => setIsInteracted(true)}

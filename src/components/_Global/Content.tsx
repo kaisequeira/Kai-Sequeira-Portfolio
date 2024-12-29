@@ -2,7 +2,7 @@
 
 import Home from '@/components/Home'
 import Projects from '@/components/Projects'
-import AboutMe from '@/components/AboutMe'
+import AboutMe from '@/components/About'
 import PhysicsGame from '@/components/PhysicsGame/PhysicsGame'
 import { useGameContext } from '@/components/PhysicsGame/GameContext'
 import { useEffect } from 'react'
@@ -12,13 +12,17 @@ export default function Content() {
     const { gameLoaded, setGameLoaded } = useGameContext()
 
     useEffect(() => {
-        const handleResize = () => {
+        const handleCloseGame = () => {
             setGameLoaded(false)
         }
 
-        window.addEventListener('resize', handleResize)
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+        mediaQuery.addEventListener('change', handleCloseGame)
+        window.addEventListener('resize', handleCloseGame)
         return () => {
-            window.removeEventListener('resize', handleResize)
+            mediaQuery.removeEventListener('change', handleCloseGame)
+            window.removeEventListener('resize', handleCloseGame)
         }
     }, [setGameLoaded])
 

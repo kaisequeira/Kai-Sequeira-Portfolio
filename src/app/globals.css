@@ -126,7 +126,7 @@ html {
 }
 
 h1 {
-    @apply text-content xl:text-8xl lg:text-7xl md:text-6xl sm:text-6xl text-5xl font-semibold select-none;
+    @apply text-content tall:xl:text-8xl small:lg:text-7xl small:md:text-6xl small:sm:text-6xl text-5xl font-semibold select-none;
 }
 
 h2 {
@@ -138,11 +138,11 @@ h3 {
 }
 
 h4 {
-    @apply text-content xl:text-2xl lg:text-xl md:text-xl sm:text-xl text-lg font-light select-none;
+    @apply text-content medium:xl:text-2xl small:lg:text-xl small:md:text-xl small:sm:text-xl small:text-lg text-base font-light select-none;
 }
 
 h5 {
-    @apply text-content lg:text-xl md:text-lg sm:text-lg font-light select-none;
+    @apply text-content small:lg:text-xl small:md:text-lg small:sm:text-lg text-base font-light select-none;
 }
 
 p {

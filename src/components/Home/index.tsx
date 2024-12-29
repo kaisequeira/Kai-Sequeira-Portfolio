@@ -15,7 +15,7 @@ const Home: React.FC = () => {
     return (
         <div
             className={cn(
-                'w-screen h-screen flex flex-col items-center justify-center relative pointer-events-none'
+                'w-screen h-screen min-h-fit py-5 flex flex-col items-center justify-center relative pointer-events-none'
             )}
         >
             <motion.div
@@ -23,12 +23,12 @@ const Home: React.FC = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.1 }}
-                className="flex-grow flex flex-col justify-center lg:items-center items-start lg:gap-12 gap-8 pb-16 lg:w-[1000px] xs:w-[360px] w-[330px] px-0"
+                className="flex-grow flex flex-col justify-center lg:items-center items-start medium:lg:gap-12 gap-8 medium:pb-16 pb-6 lg:w-[1000px] xs:w-[360px] w-[330px] px-0"
             >
                 <h1 className="lg:text-center text-left text-wrap">
                     Nice to meet you, I&apos;m Kai.
                 </h1>
-                <div className="flex flex-col lg:items-center items-start gap-4">
+                <div className="flex flex-col lg:items-center items-start small:gap-4 gap-1.5">
                     <h5 className="lg:text-center text-left text-wrap lg:px-6 lg:py-3 px-4 py-2 rounded-5xl bg-secondary w-fit font-semibold">
                         SOFTWARE ENGINEERING & FINANCE
                     </h5>
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
                         </Label>
                     </div>
                 </div>
-                <div className="lg:flex grid grid-cols-4 relative lg:gap-8 gap-4">
+                <div className="lg:flex grid grid-cols-4 relative medium:lg:gap-8 lg:gap-5 gap-4">
                     <div className="lg:transform -rotate-6 translate-y-4 transform-none">
                         <ContactBox type="Github" />
                     </div>

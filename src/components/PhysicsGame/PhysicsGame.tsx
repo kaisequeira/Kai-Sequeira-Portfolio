@@ -1,44 +1,47 @@
-type ExtendedMouse = Matter.Mouse & {
-    body?: Matter.Body
-    constraint?: Matter.Constraint
-}
-
-;('use client')
+'use client';
 
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import Matter from 'matter-js'
 import { motion } from 'framer-motion'
+
+type ExtendedMouse = Matter.Mouse & {
+    body?: Matter.Body
+    constraint?: Matter.Constraint
+}
 
 export default function PhysicsGame() {
     const sceneRef = useRef<HTMLDivElement>(null)
     const engineRef = useRef<Matter.Engine | null>(null)
     const [mouse, setMouse] = useState<ExtendedMouse | null>(null)
     const [isMousePressed, setIsMousePressed] = useState(false)
-    const [mouseConstraint, setMouseConstraint] =
-        useState<Matter.MouseConstraint | null>(null)
     const [constraintApplied, setConstraintApplied] = useState(false)
+    const [mouseConstraint, setMouseConstraint] = useState<Matter.MouseConstraint | null>(null)
 
     useEffect(() => {
+        if (!sceneRef.current) return
+
         const getCSSVariableValue = (variableName: any) => {
             return getComputedStyle(document.documentElement)
                 .getPropertyValue(variableName)
                 .trim()
         }
-
-        const contentColor = getCSSVariableValue('--color-content')
-        const [contentR, contentG, contentB] = contentColor
+    
+        const [contentR, contentG, contentB] = getCSSVariableValue('--color-content')
             .split(',')
             .map(Number)
-
+    
         const accentColors: number[][] = []
         for (let i = 1; i <= 5; i++) {
             const accentColor = getCSSVariableValue(`--color-acc${i}`)
             const [r, g, b] = accentColor.split(',').map(Number)
             accentColors.push([r, g, b])
         }
-
-        if (!sceneRef.current) return
-
+    
+        // Get the width and height of the scene
+        const width = sceneRef.current.offsetWidth
+        const height = sceneRef.current.offsetHeight
+    
+        // Matter.js setup
         const Engine = Matter.Engine
         const Render = Matter.Render
         const Runner = Matter.Runner
@@ -47,18 +50,17 @@ export default function PhysicsGame() {
         const Mouse = Matter.Mouse
         const MouseConstraint = Matter.MouseConstraint
         const Constraint = Matter.Constraint
-        const Composites = Matter.Composites
         const Events = Matter.Events
-
+        const runner = Runner.create()
         const engine = Engine.create()
+        
+        // Engine setup
         engineRef.current = engine
         engine.gravity.y = 0
-        //   engine.gravity.x = 1
-        const runner = Runner.create()
-
-        const width = sceneRef.current.offsetWidth
-        const height = window.innerHeight
-
+    
+        /**
+         * Create the renderer for the game
+         */
         const render = Render.create({
             element: sceneRef.current,
             engine: engine,
@@ -69,162 +71,179 @@ export default function PhysicsGame() {
                 background: 'transparent',
             },
         })
-
-        // Ground parameters
-        const ground = Bodies.rectangle(
-            width * (7 / 8),
-            height * (2 / 3),
-            99,
-            30,
-            {
-                isStatic: true,
+    
+        /**
+         * Generate random shapes on the left or right side of the screen
+         * 
+         * @param side 
+         * @returns 
+         */
+        const generateRandomShapes = (side: 'left' | 'right') => {
+            const shapeCount = Math.floor(height / 50);                 // Density
+            const shapes = [];
+        
+            for (let i = 0; i < shapeCount; i++) {
+                const x = side === 'left'
+                    ? Math.random() * (width / 8)
+                    : width - Math.random() * (width / 8);
+                const y = Math.random() * height * 2 - height / 2;      // Random y position
+                const sides = Math.floor(Math.random() * 4) + 3;        // Random edge count
+                const size = Math.random() * 50 + 30;                   // Random size
+        
+                const randomAccentColor = accentColors[Math.floor(Math.random() * accentColors.length)];
+                const [accentR, accentG, accentB] = randomAccentColor;
+        
+                const shape = Bodies.polygon(x, y, sides, size, {
+                    render: {
+                        fillStyle: `rgb(${accentR}, ${accentG}, ${accentB})`,
+                    },
+                });
+        
+                shapes.push(shape);
+            }
+        
+            return shapes;
+        };
+    
+        /**
+         * Generate the slingshot, also creates initial ammo
+         * 
+         * @param accentR 
+         * @param accentG 
+         * @param accentB 
+         * @returns 
+         */
+        const generateSling = () => {
+            const randomAccentColor = accentColors[Math.floor(Math.random() * accentColors.length)];
+            const [accentR, accentG, accentB] = randomAccentColor;
+            const ball = Bodies.circle(width * (1/ 2), innerHeight * (4 / 5), 30, {
+                render: { fillStyle: `rgb(${accentR}, ${accentG}, ${accentB})` },
+            })
+            const sling = Constraint.create({
+                pointA: { x: width * (1 / 2), y: innerHeight * (4 / 5) },
+                bodyB: ball,
+                stiffness: 0.1,
+                damping: 0.1,
                 render: {
-                    fillStyle: `rgb(${contentR}, ${contentG}, ${contentB})`,
+                    type: 'line',
+                    visible: true,
+                    lineWidth: 5,
+                    strokeStyle: `rgb(${contentR}, ${contentG}, ${contentB})`,
                 },
-            }
-        )
-
-        // Select a random accent color for the initial ball
-        let randomAccentColor =
-            accentColors[Math.floor(Math.random() * accentColors.length)]
-        let [accentR, accentG, accentB] = randomAccentColor
-
-        // Slingshot position and size
-        let ball = Bodies.circle(width * (4 / 8), height * (4 / 5), 30, {
-            render: { fillStyle: `rgb(${accentR}, ${accentG}, ${accentB})` },
-        })
-        let sling = Constraint.create({
-            pointA: { x: width * (4 / 8), y: height * (4 / 5) },
-            bodyB: ball,
-            stiffness: 0.1,
-            damping: 0.1,
-            render: {
-                type: 'line',
-                visible: true,
-                lineWidth: 5,
-                strokeStyle: `rgb(${contentR}, ${contentG}, ${contentB})`,
-            },
-        })
-
-        // Create mouse and mouse constraint
-        const mouse = Mouse.create(render.canvas) as ExtendedMouse
-        setMouse(mouse)
-        const mouseConstraint = MouseConstraint.create(engine, {
-            mouse: mouse,
-            constraint: {
-                stiffness: 0.2,
-                render: { visible: false },
-            },
-        }) as Matter.MouseConstraint
-        setMouseConstraint(mouseConstraint)
-
-        // Ensure the mouse is properly scaled and offset
-        mouse.pixelRatio = window.devicePixelRatio || 1
-        mouse.offset = { x: 0, y: 0 }
-
-        let firing = false
-        let passedThroughCenter = false
-        let timeoutId: NodeJS.Timeout | null = null
-
-        Events.on(mouseConstraint, 'enddrag', function (e: any) {
-            if (e.body === ball) {
-                firing = true
-                passedThroughCenter = false
-
-                if (timeoutId) clearTimeout(timeoutId)
-                timeoutId = setTimeout(() => {
-                    if (!passedThroughCenter) {
-                        console.log(
-                            'Fallback: Ball did not pass through the center within 0.3 seconds'
-                        )
-                        passedThroughCenter = true
-                    }
-                }, 300)
-            }
-        })
-
-        Events.on(engine, 'afterUpdate', function () {
-            const dx = ball.position.x - width * (4 / 8)
-            const dy = ball.position.y - height * (4 / 5)
-            const distance = Math.sqrt(dx * dx + dy * dy)
-
-            // Check if the ball has passed through the center of the slingshot
-            if (firing && !passedThroughCenter && distance < 35) {
-                passedThroughCenter = true
-                sling.bodyB = null
-                sling.render.visible = false
-            }
-
-            // Check if the ball is far enough away to spawn a new one
-            if (firing && passedThroughCenter && distance > 50) {
-                // Select a new random accent color for each new ball
-                randomAccentColor =
-                    accentColors[
-                        Math.floor(Math.random() * accentColors.length)
-                    ]
-                ;[accentR, accentG, accentB] = randomAccentColor
-
-                ball = Bodies.circle(width * (4 / 8), height * (4 / 5), 30, {
-                    render: {
-                        fillStyle: `rgb(${accentR}, ${accentG}, ${accentB})`,
-                    },
-                })
-                World.add(engine.world, ball)
-                sling.bodyB = ball
-                sling.render.visible = true
-                firing = false
-
-                // Clear the timeout if the ball has passed through the center
-                if (timeoutId) clearTimeout(timeoutId)
-            }
-        })
-
-        // Shape parameters, '8' for octagon
-        const stack = Composites.stack(
-            width * (6 / 8) - 49.5,
-            height * (2 / 3) - 350,
-            5,
-            5,
-            4,
-            4,
-            function (x: any, y: any) {
-                randomAccentColor =
-                    accentColors[
-                        Math.floor(Math.random() * accentColors.length)
-                    ]
-                ;[accentR, accentG, accentB] = randomAccentColor
-
-                return Bodies.polygon(x, y, 8, 30, {
-                    render: {
-                        fillStyle: `rgb(${accentR}, ${accentG}, ${accentB})`,
-                    },
-                })
-            }
-        )
-
-        const MatterBodies: any = [stack, ball, sling, mouseConstraint]
-        setConstraintApplied(true)
-        World.add(engine.world, MatterBodies)
-
-        // Run the engine and renderer
-        Runner.run(runner, engine)
-        Render.run(render)
-
-        const updateColors = () => {
-            const newContentColor = getCSSVariableValue('--color-content')
-            const [newR, newG, newB] = newContentColor.split(',').map(Number)
-            ground.render.fillStyle = `rgb(${newR}, ${newG}, ${newB})`
+            })
+            return { ball, sling }
+        }
+    
+        /**
+         * Setup the mouse and mouse constraint
+         * @returns 
+         */
+        const setupMouse = () => {
+            const mouse = Mouse.create(render.canvas) as ExtendedMouse
+            setMouse(mouse)
+            const mouseConstraint = MouseConstraint.create(engine, {
+                mouse: mouse,
+                constraint: {
+                    stiffness: 0.2,
+                    render: { visible: false },
+                },
+            }) as Matter.MouseConstraint
+            setMouseConstraint(mouseConstraint)
+    
+            mouse.pixelRatio = window.devicePixelRatio || 1
+            mouse.offset = { x: 0, y: 0 }
+    
+            return mouseConstraint
         }
 
-        // Add event listeners
-        window.addEventListener('resize', updateColors)
+        /**
+         * Handle the events for the slingshot, including the firing and spawning of new balls
+         * 
+         * @param mouseConstraint 
+         * @param ball 
+         * @param sling 
+         */
+        const handleEvents = (mouseConstraint: Matter.MouseConstraint, ball: Matter.Body, sling: Matter.Constraint) => {
+            let firing = false
+            let passedThroughCenter = false
+            let timeoutId: NodeJS.Timeout | null = null
+    
+            Events.on(mouseConstraint, 'enddrag', function (e: any) {
+                if (e.body === ball) {
+                    firing = true
+                    passedThroughCenter = false
+    
+                    if (timeoutId) clearTimeout(timeoutId)
+                    timeoutId = setTimeout(() => {
+                        if (!passedThroughCenter) {
+                            console.log(
+                                'Fallback: Ball did not pass through the center within 0.3 seconds'
+                            )
+                            passedThroughCenter = true
+                        }
+                    }, 300)
+                }
+            })
+    
+            Events.on(engine, 'afterUpdate', function () {
+                const dx = ball.position.x - width * (4 / 8)
+                const dy = ball.position.y - innerHeight * (4 / 5)
+                const distance = Math.sqrt(dx * dx + dy * dy)
+    
+                // Check ammo has passed through the center
+                if (firing && !passedThroughCenter && distance < 35) {
+                    passedThroughCenter = true
+                    sling.bodyB = null
+                    sling.render.visible = false
+                }
+    
+                // Check ammo is fired far enough before spawning new ammo
+                if (firing && passedThroughCenter && distance > 50) {
+                    const randomAccentColor =
+                        accentColors[
+                            Math.floor(Math.random() * accentColors.length)
+                        ]
+                    const [accentR, accentG, accentB] = randomAccentColor
+    
+                    ball = Bodies.circle(width * (4 / 8), innerHeight * (4 / 5), 30, {
+                        render: {
+                            fillStyle: `rgb(${accentR}, ${accentG}, ${accentB})`,
+                        },
+                    })
+                    World.add(engine.world, ball)
+                    sling.bodyB = ball
+                    sling.render.visible = true
+                    firing = false
+    
+                    if (timeoutId) clearTimeout(timeoutId)
+                }
+            })
+        }
+    
+        // Generate the shapes, slingshot and mouse constraint
+        const leftShapes = generateRandomShapes('left');
+        const rightShapes = generateRandomShapes('right');
+        const { ball, sling } = generateSling()
+        const mouseConstraint = setupMouse()
+        handleEvents(mouseConstraint, ball, sling)
 
-        // Ensure the mouse is added to the render context
-        render.mouse = mouse
-
+        // Add all the bodies to the world
+        setConstraintApplied(true)
+        const MatterBodies: any = [mouseConstraint, ...leftShapes, ...rightShapes]
+        
+        if (innerHeight > 780)
+            MatterBodies.push(ball, sling);
+        
+        World.add(engine.world, MatterBodies)
+    
+        // Run the engine, renderer and add mouse
+        Runner.run(runner, engine)
+        Render.run(render)
+        if (mouse !== null)
+            render.mouse = mouse
+    
         // Cleanup function
         return () => {
-            window.removeEventListener('resize', updateColors)
             Render.stop(render)
             Runner.stop(runner)
             World.clear(engine.world, false)
@@ -235,6 +254,9 @@ export default function PhysicsGame() {
         }
     }, [])
 
+    /**
+     * Release the objects from the mouse constraint. Is called when the mouse loses focus of game scene
+     */
     const releaseObjects = useCallback(() => {
         if (mouseConstraint?.body && engineRef.current && constraintApplied) {
             Matter.Composite.remove(
@@ -245,6 +267,9 @@ export default function PhysicsGame() {
         }
     }, [mouseConstraint, constraintApplied])
 
+    /**
+     * Apply the constraint to the mouse. Is called when the mouse enters the game scene
+    */
     const applyConstraint = useCallback(() => {
         if (mouseConstraint && engineRef.current && !constraintApplied) {
             mouseConstraint.constraint.bodyB = null
@@ -257,6 +282,9 @@ export default function PhysicsGame() {
         }
     }, [mouseConstraint, constraintApplied])
 
+    /**
+     * Event listeners for mouse and touch interactions
+     */
     useEffect(() => {
         if (!mouse || !sceneRef.current || !engineRef.current) return
 
@@ -267,11 +295,7 @@ export default function PhysicsGame() {
                 mouse.position.y = clientY - bounds.top
             }
         }
-
-        const handleMouseMove = (event: MouseEvent) => {
-            updateMousePosition(event.clientX, event.clientY)
-        }
-
+        
         const handleTouchMove = (event: TouchEvent) => {
             event.preventDefault()
             updateMousePosition(
@@ -280,8 +304,17 @@ export default function PhysicsGame() {
             )
         }
 
-        const handleMouseDown = () => setIsMousePressed(true)
-        const handleMouseUp = () => setIsMousePressed(false)
+        const handleMouseMove = (event: MouseEvent) => {
+            updateMousePosition(event.clientX, event.clientY)
+        }
+
+        const handleMouseDown = () => {
+            setIsMousePressed(true)
+        }
+        
+        const handleMouseUp = () => {
+            setIsMousePressed(false)
+        }
 
         const handleMouseOut = (event: MouseEvent) => {
             if (!sceneRef.current?.contains(event.relatedTarget as Node)) {
@@ -308,10 +341,7 @@ export default function PhysicsGame() {
             sceneRef.current?.removeEventListener('mouseup', handleMouseUp)
             sceneRef.current?.removeEventListener('mouseout', handleMouseOut)
             // eslint-disable-next-line react-hooks/exhaustive-deps
-            sceneRef.current?.removeEventListener(
-                'mouseenter',
-                handleMouseEnter
-            )
+            sceneRef.current?.removeEventListener('mouseenter', handleMouseEnter)
         }
     }, [mouse, engineRef, releaseObjects, applyConstraint])
 

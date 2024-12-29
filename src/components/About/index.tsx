@@ -5,13 +5,14 @@ import Image from 'next/image'
 import ResumePhoto from '/public/About/ResumePhotoKai.jpg'
 import Bio from './Bio'
 import { circOut, useScroll, useTransform, motion } from 'framer-motion'
+import { useMediaQuery } from 'react-responsive'
 
 const AboutMe: React.FC = () => {
     const [isLoaded, setIsLoaded] = useState(false)
     const targetRef = useRef(null)
     const { scrollYProgress } = useScroll({
         target: targetRef,
-        offset: ['25% end', 'center center'],
+        offset: ['start end', 'center center'],
     })
 
     const opacity = useTransform(scrollYProgress, [0, 1], ['0%', '99%'], {
@@ -23,7 +24,7 @@ const AboutMe: React.FC = () => {
     }, [])
 
     return (
-        <div className="bg-bgr w-full lg:tall:h-[50vh] min-h-fit flex flex-row items-center justify-center pt-1/20 pointer-events-none">
+        <div className="bg-bgr w-full lg:medium:h-[50vh] min-h-fit flex flex-row items-center justify-center pt-1/20 pointer-events-none">
             <motion.div
                 ref={targetRef}
                 initial={{ opacity: 1 }}
@@ -35,7 +36,7 @@ const AboutMe: React.FC = () => {
                 <div className="lg:w-fit w-full h-full flex items-center justify-center flex-col">
                     <Image
                         src={ResumePhoto}
-                        className="rounded-3xl"
+                        className="rounded-3xl shadow-thick select-none"
                         alt="Profile Photo"
                         quality={100}
                         width={440}

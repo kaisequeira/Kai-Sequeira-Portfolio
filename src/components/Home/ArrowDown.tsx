@@ -20,7 +20,7 @@ export default function ScrollDownButton() {
 
     return (
         <motion.button
-            className="size-fit pb-0 z-50 absolute bottom-1/20 pointer-events-auto"
+            className="size-fit pb-0 z-50 absolute bottom-1/20 pointer-events-auto medium:block hidden"
             onTap={scrollToProjects}
         >
             <motion.div>
