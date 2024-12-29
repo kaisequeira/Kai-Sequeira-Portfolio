@@ -8,7 +8,7 @@ Welcome to the repository for my personal portfolio website. This site showcases
 
 ## 🌐 Live Website
 
-[Visit my portfolio]()
+[Visit my portfolio](https://www.kaisequeira.com/)
 
 ## 🛠️ Technologies Used
 
