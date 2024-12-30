@@ -43,7 +43,7 @@ const Bio: React.FC<BioProps> = ({ className }) => {
                         </Hyperlink>{' '}
                         pursuing a double Bachelor&apos;s degree in{' '}
                         <Hyperlink
-                            href="https://www.unsw.edu.au/engineering"
+                            href="https://www.handbook.unsw.edu.au/undergraduate/specialisations/2025/SENGAH?year=2025"
                             colour="--color-acc2"
                             newTab
                         >
@@ -51,7 +51,7 @@ const Bio: React.FC<BioProps> = ({ className }) => {
                         </Hyperlink>{' '}
                         (Honours) and{' '}
                         <Hyperlink
-                            href="https://www.unsw.edu.au/business"
+                            href="https://www.handbook.unsw.edu.au/undergraduate/specialisations/2023/FINSA1"
                             colour="--color-acc3"
                             newTab
                         >
