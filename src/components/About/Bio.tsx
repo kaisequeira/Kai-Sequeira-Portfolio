@@ -26,10 +26,7 @@ const Bio: React.FC<BioProps> = ({ className }) => {
                 About <TransformingIcon />
             </h2>
             <div
-                className={cn(
-                    'flex flex-col gap-4',
-                    !isLgOrAbove ? 'pointer-events-auto' : 'pointer-events-none'
-                )}
+                className='flex flex-col gap-4 pointer-events-auto lg:pointer-events-none'
                 onClick={handleClick}
             >
                 <div

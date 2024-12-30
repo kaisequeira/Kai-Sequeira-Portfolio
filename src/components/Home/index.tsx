@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Label from '../_Global/Label'
 import { faLocationDot, faSchool } from '@fortawesome/free-solid-svg-icons'
 import ContactBox from './ContactBox'
+import ColorSchemeToggle from './ThemeToggle'
 
 const Home: React.FC = () => {
     return (
@@ -76,6 +77,7 @@ const Home: React.FC = () => {
                 </div>
             </motion.div>
             <ScrollDownButton />
+            <ColorSchemeToggle />
         </div>
     )
 }

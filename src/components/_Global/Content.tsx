@@ -7,24 +7,26 @@ import PhysicsGame from '@/components/PhysicsGame/PhysicsGame'
 import { useGameContext } from '@/components/PhysicsGame/GameContext'
 import { useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
+import { useTheme } from 'next-themes'
 
 export default function Content() {
     const { gameLoaded, setGameLoaded } = useGameContext()
+    const { theme } = useTheme()
+
+    const handleCloseGame = () => {
+        setGameLoaded(false)
+    }
 
     useEffect(() => {
-        const handleCloseGame = () => {
-            setGameLoaded(false)
-        }
-
-        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-
-        mediaQuery.addEventListener('change', handleCloseGame)
         window.addEventListener('resize', handleCloseGame)
         return () => {
-            mediaQuery.removeEventListener('change', handleCloseGame)
             window.removeEventListener('resize', handleCloseGame)
         }
     }, [setGameLoaded])
+
+    useEffect(() => {
+        handleCloseGame()
+    }, [theme])
 
     return (
         <div className="flex flex-col relative">

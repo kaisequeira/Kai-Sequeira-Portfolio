@@ -30,6 +30,8 @@ interface ContactBoxProps {
 const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
     const [hovered, setHovered] = useState(false)
     const [clicked, setClicked] = useState(false)
+    const [initial, setInitial] = useState(true)
+
     const EMAIL = 'kai.sequeira2003@gmail.com'
     let icon: JSX.Element,
         color: string,
@@ -134,30 +136,32 @@ const ContactBox: React.FC<ContactBoxProps> = ({ type }) => {
             <RoughNotation
                 type="underline"
                 show={type === 'Play' && !hovered && !gameLoaded}
-                color={`rgb(var(--color-offwhite))`}
+                color={`rgb(var(--color-content))`}
                 strokeWidth={2}
                 padding={15}
-                iterations={2}
+                iterations={3}
                 animationDuration={1000}
                 animate={true}
+                animationDelay={initial ? 1500 : 0}
             >
-            <motion.button
-                className={
-                    'small:lg:rounded-3xl rounded-2xl small:lg:size-24 small:sm:size-20 size-16 flex items-center justify-center pointer-events-auto'
-                }
-                style={{ backgroundImage: color }}
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-                whileTap={{ scale: isLgOrAbove ? 1 : 0.75 }}
-                whileHover={{ y: -10 }}
-                onClick={handleClick}
-            >
-                <span
-                    className={`flex items-center justify-center text-offwhite`}
+                <motion.button
+                    className={
+                        'small:lg:rounded-3xl rounded-2xl small:lg:size-24 small:sm:size-20 size-16 flex items-center justify-center pointer-events-auto'
+                    }
+                    style={{ backgroundImage: color }}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                    whileTap={{ scale: isLgOrAbove ? 1 : 0.75 }}
+                    whileHover={{ y: -10 }}
+                    onClick={handleClick}
+                    onAnimationStart={() => setInitial(false)}
                 >
-                    {icon}
-                </span>
-            </motion.button>
+                    <span
+                        className={`flex items-center justify-center text-offwhite`}
+                    >
+                        {icon}
+                    </span>
+                </motion.button>
             </RoughNotation>
             <motion.div
                 style={{ backgroundImage: color }}
