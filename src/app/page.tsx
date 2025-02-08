@@ -7,7 +7,7 @@ import Content from '@/components/_Global/Content'
 
 export default function Page() {
     return (
-        <main className={`w-screen flex flex-col bg-bgr`}>
+        <main className={`w-screen flex flex-col`}>
             <LenisWrapper>
                 <GameProvider>
                     <Content />

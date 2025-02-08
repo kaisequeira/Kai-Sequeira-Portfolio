@@ -24,7 +24,7 @@ const AboutMe: React.FC = () => {
     }, [])
 
     return (
-        <div className="bg-bgr w-full lg:medium:h-[50vh] min-h-fit flex flex-row items-center justify-center pt-1/20 pointer-events-none">
+        <div className="w-full lg:medium:h-[50vh] min-h-fit flex flex-row items-center justify-center pt-1/20 pointer-events-none">
             <motion.div
                 ref={targetRef}
                 initial={{ opacity: 1 }}
