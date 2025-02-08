@@ -2,9 +2,8 @@
 
 import React from 'react'
 import { useMediaQuery } from 'react-responsive'
-import Hyperlink from '../_Global/Hyperlink'
+import UnderlineText from '../_Global/UnderlineText'
 import TransformingIcon from './TransformingIcon'
-import { cn } from '@/lib/utils'
 
 type BioProps = {
     className?: string
@@ -34,40 +33,40 @@ const Bio: React.FC<BioProps> = ({ className }) => {
                 >
                     <p className="text-content font-normal md:text-xl sm:text-lg text-base">
                         I am currently in my fourth year at{' '}
-                        <Hyperlink
+                        <UnderlineText
                             href="https://www.unsw.edu.au/"
                             colour="--color-acc1"
                             newTab
                         >
                             UNSW,
-                        </Hyperlink>{' '}
+                        </UnderlineText>{' '}
                         pursuing a double Bachelor&apos;s degree in{' '}
-                        <Hyperlink
+                        <UnderlineText
                             href="https://www.handbook.unsw.edu.au/undergraduate/specialisations/2025/SENGAH?year=2025"
                             colour="--color-acc2"
                             newTab
                         >
                             Software Engineering{' '}
-                        </Hyperlink>{' '}
+                        </UnderlineText>{' '}
                         (Honours) and{' '}
-                        <Hyperlink
+                        <UnderlineText
                             href="https://www.handbook.unsw.edu.au/undergraduate/specialisations/2023/FINSA1"
                             colour="--color-acc3"
                             newTab
                         >
                             Commerce
-                        </Hyperlink>
+                        </UnderlineText>
                         , with a major in Finance.
                     </p>
                     <p className="text-content font-normal md:text-xl sm:text-lg text-base">
                         Previously a Software Engineer at{' '}
-                        <Hyperlink
+                        <UnderlineText
                             href="https://www.redbackracing.com/"
                             colour="--color-acc4"
                             newTab
                         >
                             UNSW Redback Racing
-                        </Hyperlink>
+                        </UnderlineText>
                         , my current role as the Telemetry Project Lead
                         encompasses managing a team of +7 software engineers
                         across data analytics, cloud ops, streaming, database

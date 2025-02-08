@@ -4,7 +4,7 @@ import ProjectPane from './ProjectPane'
 import { faSquareArrowUpRight } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import ProjectTitle from './ProjectTitle'
-import Hyperlink from '../_Global/Hyperlink'
+import UnderlineText from '../_Global/UnderlineText'
 
 const Projects: React.FC = () => {
     return (
@@ -21,39 +21,35 @@ const Projects: React.FC = () => {
                             <span className="inline-block text-center select-none">
                                 A system to manage logged data from the UNSW
                                 Redback Racing vehicle utilizing{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc1"
-                                    href="https://aws.amazon.com/dynamodb/"
                                 >
                                     AWS DynamoDB
-                                </Hyperlink>{' '}
+                                </UnderlineText>{' '}
                                 for efficient NoSQL data storage and{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc1"
-                                    href="https://aws.amazon.com/s3/"
                                 >
                                     S3
-                                </Hyperlink>{' '}
+                                </UnderlineText>{' '}
                                 for large file handling. The frontend is built
                                 using{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc1"
-                                    href="https://nextjs.org/"
                                 >
                                     Next.js
-                                </Hyperlink>{' '}
+                                </UnderlineText>{' '}
                                 and TypeScript, featuring server-side rendering
                                 and a responsive{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc1"
-                                    href="https://tailwindcss.com/"
                                 >
                                     Tailwind CSS
-                                </Hyperlink>{' '}
+                                </UnderlineText>{' '}
                                 design.
                             </span>
                         }
-                        link="https://spyder.redbackracing.com"
+                        link="https://spyder.redbackracing.com/data-analytics/log-management"
                         src="./Projects/LogManagement.mp4"
                         icon={faSquareArrowUpRight}
                     />
@@ -66,37 +62,33 @@ const Projects: React.FC = () => {
                             <span className="inline-block text-center select-none">
                                 Crab Crawler is a 2D pixel art platformer built
                                 with{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc3"
-                                    href="https://unity.com/"
                                 >
                                     Unity
-                                </Hyperlink>{' '}
+                                </UnderlineText>{' '}
                                 and C#, featuring custom graphics created in{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc3"
-                                    href="https://www.aseprite.org/"
                                 >
                                     Aseprite
-                                </Hyperlink>{' '}
+                                </UnderlineText>{' '}
                                 and original music composed using{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc3"
-                                    href="https://boscaceoil.net/"
                                 >
                                     Bosca Ceoil
-                                </Hyperlink>
+                                </UnderlineText>
                                 . Crab Crawler showcases a state-based animation
                                 system, cross-platform input handling for both
                                 keyboard and controller, and a robust save
                                 system that works across different deployments.
                                 Deployed as a WebGL game in{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc3"
-                                    href="https://pages.github.com/"
                                 >
                                     Github Pages
-                                </Hyperlink>
+                                </UnderlineText>
                                 , Crab Crawler is directly playable through the
                                 browser.
                             </span>
@@ -116,19 +108,17 @@ const Projects: React.FC = () => {
                             <span className="inline-block text-center select-none">
                                 A 15,000+ line rewrite of the spyder telemetry
                                 frontend, transitioning from the{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc2"
-                                    href="https://mui.com/"
                                 >
                                     Material-UI
-                                </Hyperlink>{' '}
+                                </UnderlineText>{' '}
                                 component library to{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc2"
-                                    href="https://ui.shadcn.com/"
                                 >
                                     Shadcn/ui
-                                </Hyperlink>
+                                </UnderlineText>
                                 . Implemented custom utility functions for
                                 keyboard shortcuts, a new notification system,
                                 and extensively refactored the codebase for
@@ -136,12 +126,11 @@ const Projects: React.FC = () => {
                                 enhanced the team&apos;s data analysis
                                 capabilities with a more intuitive and
                                 responsive interface built with{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc2"
-                                    href="https://nextjs.org/"
                                 >
                                     Next.js
-                                </Hyperlink>{' '}
+                                </UnderlineText>{' '}
                                 and TypeScript.
                             </span>
                         }
@@ -158,28 +147,25 @@ const Projects: React.FC = () => {
                             <span className="inline-block text-center select-none">
                                 Emberscape is a 2D pixel art survival game built
                                 using the{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc4"
-                                    href="https://godotengine.org/"
                                 >
                                     Godot Engine
-                                </Hyperlink>{' '}
+                                </UnderlineText>{' '}
                                 and C#. It features a dynamic inventory system,
                                 interactive gameplay, and custom pixel art
                                 assets made in{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc4"
-                                    href="https://www.aseprite.org/"
                                 >
                                     Aseprite
-                                </Hyperlink>
+                                </UnderlineText>
                                 . Utilising Godot&apos;s{' '}
-                                <Hyperlink
+                                <UnderlineText
                                     colour="--color-acc4"
-                                    href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html"
                                 >
                                     signal system
-                                </Hyperlink>{' '}
+                                </UnderlineText>{' '}
                                 for event handling and node-based architecture,
                                 Emberscape demonstrates strong adherence to
                                 object-oriented programming principles.

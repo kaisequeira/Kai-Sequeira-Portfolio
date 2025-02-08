@@ -5,7 +5,7 @@ import React from 'react'
 import '@/app/globals.css'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
-import Hyperlink from '../_Global/Hyperlink'
+import UnderlineText from '../_Global/UnderlineText'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Label from '../_Global/Label'
 import { faLocationDot, faSchool } from '@fortawesome/free-solid-svg-icons'
@@ -35,13 +35,13 @@ const Home: React.FC = () => {
                     </h5>
                     <h4 className="lg:text-center text-left text-wrap p-0">
                         Currently the Telemetry Project Lead at{' '}
-                        <Hyperlink
+                        <UnderlineText
                             href="https://www.redbackracing.com/"
                             colour="--color-acc4"
                             newTab
                         >
                             UNSW Redback Racing
-                        </Hyperlink>
+                        </UnderlineText>
                     </h4>
                     <div className="flex flex-row lg:justify-center justify-start gap-4 flex-wrap">
                         <Label title="Institution" note="UNSW" unresponsive>

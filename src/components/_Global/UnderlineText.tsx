@@ -4,15 +4,16 @@ import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { RoughNotation } from 'react-rough-notation'
 import { useInView } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
-interface HyperlinkProps {
-    href: string
+interface UnderlineTextProps {
+    href?: string
     children: React.ReactNode
     colour?: string
     newTab?: boolean
 }
 
-const Hyperlink: React.FC<HyperlinkProps> = ({
+const UnderlineText: React.FC<UnderlineTextProps> = ({
     href,
     children,
     colour = '--color-acc1',
@@ -30,9 +31,9 @@ const Hyperlink: React.FC<HyperlinkProps> = ({
 
     return (
         <Link
-            href={href}
+            href={href ? href : ''}
             ref={ref}
-            className="relative inline-block pointer-events-auto select-none"
+            className={cn("relative inline-block select-none", href ? 'pointer-events-auto' : 'pointer-events-none')}
             target={newTab ? '_blank' : '_self'}
             rel={newTab ? 'noopener noreferrer' : ''}
         >
@@ -52,4 +53,4 @@ const Hyperlink: React.FC<HyperlinkProps> = ({
     )
 }
 
-export default Hyperlink
+export default UnderlineText

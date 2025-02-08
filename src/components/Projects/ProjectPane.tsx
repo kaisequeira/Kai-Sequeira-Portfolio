@@ -7,7 +7,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMediaQuery } from 'react-responsive'
 import { cn } from '@/lib/utils'
-import RotatingIcon from './RotatingIcon'
+import Link from 'next/link'
 
 interface ProjectPaneProps {
     icon: IconDefinition
@@ -92,7 +92,12 @@ const ProjectPane: React.FC<ProjectPaneProps> = ({
                     transition={{ type: 'tween' }}
                 >
                     <div className="h-full w-full flex flex-col relative">
-                        <RotatingIcon icon={icon} link={link} />
+                        <Link href={link} target="_blank" className='absolute h-full w-full flex justify-center items-center'>
+                            <FontAwesomeIcon
+                                className="absolute top-6 right-6 text-offwhite font-semibold text-4xl"
+                                icon={icon}
+                            />
+                        </Link>
                         <div className="flex-1 flex items-center justify-center px-1/11">
                             <div className="text-center font-semibold text-offwhite lg:block hidden">
                                 {description}
