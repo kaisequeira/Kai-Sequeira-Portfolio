@@ -16,7 +16,7 @@ const Home: React.FC = () => {
     return (
         <div
             className={cn(
-                'w-screen h-lvh min-h-fit py-5 flex flex-col items-center justify-center relative pointer-events-none'
+                'w-screen h-screen min-h-fit py-5 flex flex-col items-center justify-center relative pointer-events-none'
             )}
         >
             <motion.div
