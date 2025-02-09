@@ -50,7 +50,7 @@ const Bio: React.FC<BioProps> = ({ className }) => {
                         </UnderlineText>{' '}
                         (Honours) and{' '}
                         <UnderlineText
-                            href="https://www.handbook.unsw.edu.au/undergraduate/specialisations/2023/FINSA1"
+                            href="https://www.handbook.unsw.edu.au/undergraduate/specialisations/2025/FINSA1?year=2025"
                             colour="--color-acc3"
                             newTab
                         >
