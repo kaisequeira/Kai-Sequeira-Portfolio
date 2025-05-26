@@ -49,7 +49,7 @@ const Projects: React.FC = () => {
                                 design.
                             </span>
                         }
-                        link="https://spyder.redbackracing.com/data-analytics/log-management"
+                        link="https://spyder.redbackracing.com/analytics-tools/log-management"
                         src="./Projects/LogManagement.mp4"
                         icon={faSquareArrowUpRight}
                     />
