@@ -1,6 +1,6 @@
 # Kai Sequeira's Portfolio Website
 
-Welcome to the repository for my personal portfolio website. This site showcases my projects, skills, and experiences as a software engineer studying at UNSW @ Redback Racing.
+Welcome to the repository for my personal portfolio website. This site showcases my projects, skills, and experiences as a software engineer studying at UNSW, working with Rhombus AI & UNSW Redback Racing.
 
 ![image](https://github.com/user-attachments/assets/3fc9a64e-99cc-452d-8aa6-5b21c8f61e7e)
 
